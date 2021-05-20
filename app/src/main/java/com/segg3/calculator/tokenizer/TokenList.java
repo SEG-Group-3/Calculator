@@ -1,13 +1,10 @@
 package com.segg3.calculator.tokenizer;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 public class TokenList{
@@ -18,20 +15,20 @@ public class TokenList{
 
     }
 
-    public  int GetBracketDepth(){
+    public  int getBracketDepth(){
         return  bracketDepth;
     }
 
     // region Brackets
 
-    public boolean OpenBracket(){
+    public boolean openBracket(){
         if(tokens.size() > 0){
             Token last = tokens.get(tokens.size()-1);
             if (last.type == TokenType.Bracket && last.data.equals("(")){ // Ensure brackets must have something inside before having an inner bracket
                 return false;
             }
             if (last.type == TokenType.Bracket || last.type == TokenType.Number){
-                MulOperation();
+                mulOperation();
             }
         }
 
@@ -41,7 +38,7 @@ public class TokenList{
         return true;
     }
 
-    public boolean CloseBracket(){
+    public boolean closeBracket(){
         if (bracketDepth == 0) // So we don't have negative bracket depth
             return false;
 
@@ -60,7 +57,7 @@ public class TokenList{
 
     // region Operations
 
-    private void AddOperationToken(Token token){
+    private void addOperationToken(Token token){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
             if (last.type == TokenType.Operation) {
@@ -71,16 +68,16 @@ public class TokenList{
     }
 
 
-    public void AddOperation(){
+    public void addOperation(){
         // Can't start with plus
         if (tokens.size() == 0)
             return;
 
         // Override last operations
-        AddOperationToken(new Token(TokenType.Operation, "+"));
+        addOperationToken(new Token(TokenType.Operation, "+"));
     }
 
-    public void SubOperation(){
+    public void subOperation(){
         if (tokens.size() == 0){
             tokens.add(new Token(TokenType.Number, "-"));
             return;
@@ -105,38 +102,38 @@ public class TokenList{
         }
     }
 
-    public void MulOperation(){
+    public void mulOperation(){
         // Can't start with mul
         if (tokens.size() == 0)
             return;
 
         // Override last operations
-        AddOperationToken(new Token(TokenType.Operation, "*"));
+        addOperationToken(new Token(TokenType.Operation, "*"));
     }
 
-    public void DivOperation(){
+    public void divOperation(){
         // Can't start with div
         if (tokens.size() == 0)
             return;
 
         // Override last operations
-        AddOperationToken(new Token(TokenType.Operation, "/"));
+        addOperationToken(new Token(TokenType.Operation, "/"));
     }
 
-    public void PowOperation(){
+    public void powOperation(){
         // Can't start with pow
         if (tokens.size() == 0)
             return;
 
         // Override last operations
-        AddOperationToken(new Token(TokenType.Operation, "^"));
+        addOperationToken(new Token(TokenType.Operation, "^"));
     }
 
     // endregion
 
     // region Numbers
 
-    public void AddDigit(char digit){
+    public void addDigit(char digit){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
             if (last.type == TokenType.Number) {
@@ -144,7 +141,7 @@ public class TokenList{
                 last.data += digit;
             } else{
                 if (last.data.equals(")"))
-                    MulOperation();
+                    mulOperation();
                 tokens.add(new Token(TokenType.Number, ""+digit));
             }
         } else{
@@ -152,7 +149,7 @@ public class TokenList{
         }
     }
 
-    public void AddDigit(String digit){
+    public void addDigit(String digit){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
             if (last.type == TokenType.Number) {
@@ -160,7 +157,7 @@ public class TokenList{
                 last.data += digit;
             } else{
                 if (last.data.equals(")"))
-                    MulOperation();
+                    mulOperation();
                 tokens.add(new Token(TokenType.Number, digit));
             }
         } else{
@@ -169,7 +166,7 @@ public class TokenList{
     }
 
 
-    public void AddPeriod(){
+    public void addPeriod(){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
             if (last.type == TokenType.Number) {
@@ -181,7 +178,7 @@ public class TokenList{
                 last.data += '.';
             } else {
                 if (last.data.equals(")"))
-                    MulOperation();
+                    mulOperation();
                 tokens.add(new Token(TokenType.Number, "0."));
             }
         }  else{
@@ -193,10 +190,10 @@ public class TokenList{
 
     // region Functions
 
-    public void FunctionCall(String fun_name){
+    public void functionCall(String fun_name){
         //Only for tokenization, functions will be implemented in Calculator class
         tokens.add(new Token(TokenType.Function, fun_name));
-        OpenBracket();
+        openBracket();
     }
 
 
@@ -206,12 +203,12 @@ public class TokenList{
 
     // TODO Add a way to collapse redundant brackets
 
-    public void CleanUp(){
-        CloseAllBrackets();
+    public void cleanUp(){
+        closeAllBrackets();
         // CleanRedundancy();
     }
 
-    public void CloseAllBrackets(){
+    public void closeAllBrackets(){
         // Note that this may cause redundant brackets that may be cleaned later
         for (int i = 0; i < bracketDepth; i++) {
             tokens.add(new Token(TokenType.Bracket, ")"));
