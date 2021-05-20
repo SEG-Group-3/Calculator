@@ -19,6 +19,11 @@ public class TokenList{
         return  bracketDepth;
     }
 
+    public void removeLast(){
+        if (tokens.size() > 0)
+            tokens.remove(tokens.size()-1);
+    }
+
     // region Brackets
 
     public boolean openBracket(){
@@ -73,6 +78,13 @@ public class TokenList{
         if (tokens.size() == 0)
             return;
 
+        Token last = tokens.get(tokens.size()-1);
+        if (last.type == TokenType.Number && last.data.equals("-")){
+            removeLast();
+            return;
+        }
+
+
         // Override last operations
         addOperationToken(new Token(TokenType.Operation, "+"));
     }
@@ -84,28 +96,23 @@ public class TokenList{
         }
 
         Token last = tokens.get(tokens.size()-1);
-        switch (last.type){
-            case Bracket:
-                if (last.data.equals("("))
-                    tokens.add(new Token(TokenType.Number, "-"));
-                else
-                    tokens.add(new Token(TokenType.Operation, "-"));
-                break;
-            case Operation:
-                if (!last.data.equals("-"))
-                    tokens.add(new Token(TokenType.Number, "-"));
-                else
-                    tokens.add(new Token(TokenType.Operation, "-"));
-                break;
-            case Number:
-                tokens.add(new Token(TokenType.Operation, "-"));
+        if (last.type == TokenType.Number && last.data.equals("-")){
+            return;
         }
+        addOperationToken(new Token(TokenType.Operation, "-"));
+
     }
 
     public void mulOperation(){
         // Can't start with mul
         if (tokens.size() == 0)
             return;
+
+        Token last = tokens.get(tokens.size()-1);
+        if (last.type == TokenType.Number && last.data.equals("-")){
+            removeLast();
+            return;
+        }
 
         // Override last operations
         addOperationToken(new Token(TokenType.Operation, "*"));
@@ -115,6 +122,12 @@ public class TokenList{
         // Can't start with div
         if (tokens.size() == 0)
             return;
+
+        Token last = tokens.get(tokens.size()-1);
+        if (last.type == TokenType.Number && last.data.equals("-")){
+            removeLast();
+            return;
+        }
 
         // Override last operations
         addOperationToken(new Token(TokenType.Operation, "/"));
@@ -192,6 +205,12 @@ public class TokenList{
 
     public void functionCall(String fun_name){
         //Only for tokenization, functions will be implemented in Calculator class
+        if (tokens.size() > 0){
+            Token last = tokens.get(tokens.size()-1);
+            if ( !(last.data.equals("(")) &&  (last.type != TokenType.Operation)){
+                mulOperation();
+            }
+        }
         tokens.add(new Token(TokenType.Function, fun_name));
         openBracket();
     }
@@ -203,7 +222,7 @@ public class TokenList{
 
     // TODO Add a way to collapse redundant brackets
 
-    public void cleanUp(){
+    public void optimize(){
         closeAllBrackets();
         // CleanRedundancy();
     }
@@ -222,7 +241,11 @@ public class TokenList{
     @NonNull
     @Override
     public String toString() {
-        return String.join("", this.tokens.stream().map(Token::toString).collect(Collectors.joining()) );
+        return tokens.toString();
+    }
+
+    public String toEquationString() {
+        return String.join(" ", this.tokens.stream().map(Token::toString).collect(Collectors.joining()) );
     }
 
 
@@ -269,7 +292,6 @@ public class TokenList{
     public Iterator<Token> getIterator() {
         return tokens.iterator();
     }
-
 
 
     // endregion
