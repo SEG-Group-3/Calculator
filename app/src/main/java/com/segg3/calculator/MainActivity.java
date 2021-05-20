@@ -1,6 +1,7 @@
 package com.segg3.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,15 +13,17 @@ import com.segg3.calculator.tokenizer.TokenType;
 
 
 public class MainActivity extends AppCompatActivity {
-    public TokenList calculatorExpr;
-
+    public CalculatorViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        model = new ViewModelProvider(this).get(CalculatorViewModel.class);
         setContentView(R.layout.activity_main);
 
-        calculatorExpr = new TokenList();
+        TokenList calculatorExpr = model.getCalculatorToken().getValue();
+        ((TextView)findViewById(R.id.calc_input)).setText(calculatorExpr.toEquationString());
+        ((TextView)findViewById(R.id.calc_preview)).setText(calculatorExpr.toString());
     }
 
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // Assigns all buttons to their respective function
         // TODO Change this to an if-statement chain (A-Studio already has a method to do this for us)
         // Select "switch" -> Press Alt-Enter -> Replace 'switch' with 'if'
+        TokenList calculatorExpr = model.getCalculatorToken().getValue();
         switch (v.getId()) {
             case R.id.minusBtn:
                 calculatorExpr.subOperation();
