@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.segg3.calculator.tokenizer.TokenList;
 import com.segg3.calculator.tokenizer.TokenType;
 
+import java.net.CacheRequest;
+
 
 public class MainActivity extends AppCompatActivity {
     public CalculatorViewModel model;
@@ -21,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         model = new ViewModelProvider(this).get(CalculatorViewModel.class);
         setContentView(R.layout.activity_main);
 
-        TokenList calculatorExpr = model.getCalculatorToken().getValue();
-        ((TextView)findViewById(R.id.calc_input)).setText(calculatorExpr.toEquationString());
-        ((TextView)findViewById(R.id.calc_preview)).setText(calculatorExpr.toString());
+        Calculator calculator = model.getCalculator().getValue();
+        ((TextView)findViewById(R.id.calc_input)).setText(calculator.operationTokenizer.toEquationString());
+        //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
     }
 
 
@@ -33,34 +35,35 @@ public class MainActivity extends AppCompatActivity {
         // Assigns all buttons to their respective function
         // TODO Change this to an if-statement chain (A-Studio already has a method to do this for us)
         // Select "switch" -> Press Alt-Enter -> Replace 'switch' with 'if'
-        TokenList calculatorExpr = model.getCalculatorToken().getValue();
+        Calculator calculator = model.getCalculator().getValue();
+        TokenList operations = calculator.operationTokenizer;
         switch (v.getId()) {
             case R.id.minusBtn:
-                calculatorExpr.subOperation();
+                operations.subOperation();
                 break;
             case R.id.plusBtn:
-                calculatorExpr.addOperation();
+                operations.addOperation();
                 break;
             case R.id.timesBtn:
-                calculatorExpr.mulOperation();
+                operations.mulOperation();
                 break;
             case R.id.divBtn:
-                calculatorExpr.divOperation();
+                operations.divOperation();
                 break;
             case R.id.openBtn:
-                calculatorExpr.openBracket();
+                operations.openBracket();
                 break;
             case R.id.closeBtn:
-                calculatorExpr.closeBracket();
+                operations.closeBracket();
                 break;
             case R.id.powBtn:
-                calculatorExpr.powOperation();
+                operations.powOperation();
                 break;
             case R.id.percentBtn:
-                calculatorExpr.add(TokenType.Operation, "%");
+                operations.add(TokenType.Operation, "%");
                 break;
             case R.id.factBtn:
-                calculatorExpr.add(TokenType.Operation, "!");
+                operations.add(TokenType.Operation, "!");
                 break;
             case R.id.zeroBtn:
             case R.id.oneBtn:
@@ -73,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.eightBtn:
             case R.id.nineBtn:
                 String btnText = (String) ((Button)findViewById(v.getId())).getText();
-                calculatorExpr.addDigit(btnText);
+                operations.addDigit(btnText);
                 break;
             case R.id.periodBtn:
-                calculatorExpr.addPeriod();
+                operations.addPeriod();
                 break;
             case R.id.sinBtn:
             case R.id.cosBtn:
@@ -84,21 +87,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.lnBtn:
             case R.id.logBtn:
                 btnText = (String) ((Button)findViewById(v.getId())).getText();
-                calculatorExpr.functionCall(btnText);
+                operations.functionCall(btnText);
                 break;
             case R.id.sqrtBtn:
-                calculatorExpr.functionCall("sqrt");
+                operations.functionCall("sqrt");
             case R.id.delBtn:
-                calculatorExpr.removeLast();
+                operations.removeLast();
                 break;
             case R.id.clearBtn:
-                calculatorExpr.clear();
+                operations.clear();
                 break;
             default:
                 break;
         }
         // Updates the text views
-        ((TextView)findViewById(R.id.calc_input)).setText(calculatorExpr.toEquationString());
-        ((TextView)findViewById(R.id.calc_preview)).setText(calculatorExpr.toString());
+        ((TextView)findViewById(R.id.calc_input)).setText(operations.toEquationString());
+        //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
     }
 }
