@@ -9,14 +9,24 @@ import java.util.stream.Collectors;
 
 public class TokenList{
     public List<Token> tokens = new ArrayList<>(0);
-    private int bracketDepth = 0;
 
     public TokenList(){
 
     }
 
-    public  int getBracketDepth(){
-        return  bracketDepth;
+    public List<Token> getTokens(){
+        return tokens;
+    }
+
+    public int getBracketDepth(){
+        int depth = 0;
+        for (Token tok: tokens) {
+            if (tok.data.equals("("))
+                depth++;
+            else if (tok.data.equals(")"))
+                depth--;
+        }
+        return depth;
     }
 
     public void removeLast(){
@@ -29,22 +39,17 @@ public class TokenList{
     public boolean openBracket(){
         if(tokens.size() > 0){
             Token last = tokens.get(tokens.size()-1);
-            if (last.type == TokenType.Bracket && last.data.equals("(")){ // Ensure brackets must have something inside before having an inner bracket
-                return false;
-            }
-            if (last.type == TokenType.Bracket || last.type == TokenType.Number){
+            if (last.data.equals(")") || last.type == TokenType.Number){
                 mulOperation();
             }
         }
 
-
-        bracketDepth++;
         tokens.add(new Token(TokenType.Bracket, "("));
         return true;
     }
 
     public boolean closeBracket(){
-        if (bracketDepth == 0) // So we don't have negative bracket depth
+        if (getBracketDepth() == 0) // So we don't have negative bracket depth
             return false;
 
         Token last = tokens.get(tokens.size()-1);
@@ -52,8 +57,6 @@ public class TokenList{
             return false;
         }
 
-
-        bracketDepth--;
         tokens.add(new Token(TokenType.Bracket, ")"));
         return  true;
     }
@@ -229,10 +232,9 @@ public class TokenList{
 
     public void closeAllBrackets(){
         // Note that this may cause redundant brackets that may be cleaned later
-        for (int i = 0; i < bracketDepth; i++) {
+        for (int i = 0; i < getBracketDepth(); i++) {
             tokens.add(new Token(TokenType.Bracket, ")"));
         }
-        bracketDepth = 0;
     }
 
     // endregion
