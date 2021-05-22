@@ -4,7 +4,7 @@ import com.segg3.calculator.tokenizer.TokenList;
 
 public class Calculator {
 
-    public TokenList operationTokenizer;
+    private TokenList operationTokenizer;
 
     public Calculator()
     {
