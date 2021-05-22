@@ -106,7 +106,6 @@ public class Calculator {
                     // implment a way to check if there is an active open bracket
                     tokenList.add(TokenType.Operation, ")");
                     break;
-
                 default:
                     throw new IllegalArgumentException("Invalid OpperationType");
             }
