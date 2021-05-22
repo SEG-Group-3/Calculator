@@ -6,15 +6,15 @@ public class TokenListTest extends TestCase {
 
     public void testToString(){
         TokenList list = new TokenList();
-        assertEquals("", list.toString());
+        assertEquals("", list.toEquationString());
         list.openBracket();
         list.addDigit('1');
-        assertEquals("(1", list.toString());
+        assertEquals("(1", list.toEquationString());
         list.closeBracket();
-        assertEquals("(1)", list.toString());
+        assertEquals("(1)", list.toEquationString());
         list.addPeriod();
         list.addDigit('5');
-        assertEquals("(1)*0.5", list.toString());
+        assertEquals("(1)*0.5", list.toEquationString());
     }
 
     public void testBracketDepth() {
@@ -51,7 +51,7 @@ public class TokenListTest extends TestCase {
         list.addDigit('1');
         list.closeBracket();
         list.addDigit('1');
-        assertEquals("(1*(1)*1)*1*(1)*1", list.toString());
+        assertEquals("(1*(1)*1)*1*(1)*1", list.toEquationString());
     }
 
     public void testAddPeriod() {
@@ -61,11 +61,11 @@ public class TokenListTest extends TestCase {
         list.addPeriod();
         list.addDigit('5');
         list.addPeriod(); // Nothing should happen
-        assertEquals("-1.5", list.toString());
+        assertEquals("-1.5", list.toEquationString());
         list.subOperation();
         list.addPeriod();
         list.addDigit('2');
-        assertEquals("-1.5-0.2", list.toString());
+        assertEquals("-1.5-0.2", list.toEquationString());
     }
 
     public void testFunction(){
@@ -77,7 +77,7 @@ public class TokenListTest extends TestCase {
         list.addPeriod();
         list.addDigit('9');
         list.closeAllBrackets();
-        assertEquals("1-sin(6.9)", list.toString());
+        assertEquals("1-sin(6.9)", list.toEquationString());
     }
 
 }
