@@ -39,7 +39,7 @@ public class TokenList{
     public boolean openBracket(){
         if(tokens.size() > 0){
             Token last = tokens.get(tokens.size()-1);
-            if (last.data.equals(")") || last.type == TokenType.Number){
+            if (last.data.equals(")") || last.getTokenType() == TokenType.Number){
                 mulOperation();
             }
         }
@@ -53,7 +53,7 @@ public class TokenList{
             return false;
 
         Token last = tokens.get(tokens.size()-1);
-        if (last.type == TokenType.Bracket && last.data.equals("(")){ // Ensure brackets must have something inside before being closed
+        if (last.getTokenType() == TokenType.Bracket && last.data.equals("(")){ // Ensure brackets must have something inside before being closed
             return false;
         }
 
@@ -68,7 +68,7 @@ public class TokenList{
     private void addOperationToken(Token token){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
-            if (last.type == TokenType.Operation) {
+            if (last.getTokenType() == TokenType.Operation) {
                 tokens.remove(last);
             }
         }
@@ -82,7 +82,7 @@ public class TokenList{
             return;
 
         Token last = tokens.get(tokens.size()-1);
-        if (last.type == TokenType.Number && last.data.equals("-")){
+        if (last.getTokenType() == TokenType.Number && last.data.equals("-")){
             removeLast();
             return;
         }
@@ -99,7 +99,7 @@ public class TokenList{
         }
 
         Token last = tokens.get(tokens.size()-1);
-        if (last.type == TokenType.Number && last.data.equals("-")){
+        if (last.getTokenType() == TokenType.Number && last.data.equals("-")){
             return;
         }
         addOperationToken(new Token(TokenType.Operation, "-"));
@@ -112,7 +112,7 @@ public class TokenList{
             return;
 
         Token last = tokens.get(tokens.size()-1);
-        if (last.type == TokenType.Number && last.data.equals("-")){
+        if (last.getTokenType() == TokenType.Number && last.data.equals("-")){
             removeLast();
             return;
         }
@@ -127,7 +127,7 @@ public class TokenList{
             return;
 
         Token last = tokens.get(tokens.size()-1);
-        if (last.type == TokenType.Number && last.data.equals("-")){
+        if (last.getTokenType() == TokenType.Number && last.data.equals("-")){
             removeLast();
             return;
         }
@@ -152,7 +152,7 @@ public class TokenList{
     public void addDigit(char digit){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
-            if (last.type == TokenType.Number) {
+            if (last.getTokenType() == TokenType.Number) {
                 // Continue writing to last number
                 last.data += digit;
             } else{
@@ -168,7 +168,7 @@ public class TokenList{
     public void addDigit(String digit){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
-            if (last.type == TokenType.Number) {
+            if (last.getTokenType() == TokenType.Number) {
                 // Continue writing to last number
                 last.data += digit;
             } else{
@@ -185,7 +185,7 @@ public class TokenList{
     public void addPeriod(){
         if(tokens.size() > 0) {
             Token last = tokens.get(tokens.size()-1);
-            if (last.type == TokenType.Number) {
+            if (last.getTokenType() == TokenType.Number) {
                 // Add period to last number if it already doesn't have one
                 for (char c : last.data.toCharArray()) {
                     if (c == '.') // Number already has period, do nothing
@@ -210,7 +210,7 @@ public class TokenList{
         //Only for tokenization, functions will be implemented in Calculator class
         if (tokens.size() > 0){
             Token last = tokens.get(tokens.size()-1);
-            if ( !(last.data.equals("(")) &&  (last.type != TokenType.Operation)){
+            if ( !(last.data.equals("(")) &&  (last.getTokenType() != TokenType.Operation)){
                 mulOperation();
             }
         }
