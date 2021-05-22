@@ -4,11 +4,11 @@ import com.segg3.calculator.tokenizer.TokenList;
 
 public class Calculator {
 
-    private TokenList tokenList;
+    public TokenList operationTokenizer;
 
     public Calculator()
     {
-        tokenList = new TokenList();
+        operationTokenizer = new TokenList();
     }
 
     public float calculate()
