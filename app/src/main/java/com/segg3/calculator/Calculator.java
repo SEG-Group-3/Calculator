@@ -22,7 +22,6 @@ public class Calculator {
      * @param digit is a char that will be either appended to the end of the last token number or add new number to the tokenList
      *
      * @exception IllegalArgumentException is thrown when digit is not a number or a period
-     *
      */
     public void addDigit(char digit)
     {
@@ -56,8 +55,62 @@ public class Calculator {
         }
     }
 
-    public void addOperations(String str)
+    /**
+     * addOperations adds a function, math opperation to TokenList
+     *
+     * @param type is an OperationType that will be added to the TokenList
+     *
+     * @exception IllegalArgumentException is thrown if the type is a valid type from list
+     *
+     * @exception IllegalStateException
+     */
+    public void addOperation(OpperationType type)
     {
-        throw new UnsupportedOperationException();
+        Token last = tokenList.get(tokenList.size() - 1);
+
+        if(last.getTokenType() == TokenType.Number)
+        {
+            switch(type)
+            {
+                case PLUS:
+                    tokenList.add(TokenType.Operation, "+");
+                    break;
+                case MINUS:
+                    tokenList.add(TokenType.Operation, "-");
+                    break;
+                case MULTIPLY:
+                    tokenList.add(TokenType.Operation, "*");
+                    break;
+                case DIVIDE:
+                    tokenList.add(TokenType.Operation, "/");
+                    break;
+                case SIN:
+                    tokenList.add(TokenType.Operation, "sin");
+                    tokenList.add(TokenType.Operation, "(");
+                    break;
+                case COS:
+                    tokenList.add(TokenType.Operation, "cos");
+                    tokenList.add(TokenType.Operation, "(");
+                    break;
+                case TAN:
+                    tokenList.add(TokenType.Operation, "tan");
+                    tokenList.add(TokenType.Operation, "(");
+                    break;
+                case POWER:
+                    tokenList.add(TokenType.Operation, "^");
+                    break;
+                case OPENBRACKET:
+                    tokenList.add(TokenType.Operation, "(");
+                    break;
+                case CLOSEBRACKET:
+                    // implment a way to check if there is an active open bracket
+                    tokenList.add(TokenType.Operation, ")");
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Invalid OpperationType");
+            }
+        }
+        throw new IllegalStateException("Last token needs to be a number");
     }
 }
