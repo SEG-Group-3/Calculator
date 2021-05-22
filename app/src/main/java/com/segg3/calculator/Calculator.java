@@ -4,11 +4,11 @@ import com.segg3.calculator.tokenizer.TokenList;
 
 public class Calculator {
 
-    public TokenList tokenList;
+    public TokenList operationTokenizer;
 
     public Calculator()
     {
-        tokenList = new TokenList();
+        operationTokenizer = new TokenList();
     }
 
     public float calculate()
@@ -19,7 +19,7 @@ public class Calculator {
     /**
      * addDigit is a method to add a digit to the end of the previous number or to create a new number in TokenList
      *
-     * @param digit is a char that will be either appended to the end of the last token number or add new number to the tokenList
+     * @param digit is a char that will be either appended to the end of the last token number or add new number to the operationTokenizer
      *
      * @exception IllegalArgumentException is thrown when digit is not a number or a period
      */
@@ -31,7 +31,7 @@ public class Calculator {
             throw new IllegalArgumentException("digit char needs to be a number or a '.'");
         }
 
-        Token last = tokenList.get(tokenList.size() - 1);
+        Token last = operationTokenizer.get(operationTokenizer.size() - 1);
 
         //if last token is a number then the digit will be appended to the existing number
         if(last.getTokenType() == TokenType.Number)
@@ -46,11 +46,11 @@ public class Calculator {
         {
             if(char.isDigit(digit))
             {
-                tokenList.add(TokenType.Number, digit.toString());
+                operationTokenizer.add(TokenType.Number, digit.toString());
             }
             else
             {
-                tokenList.add(TokenType.Number, "0.");
+                operationTokenizer.add(TokenType.Number, "0.");
             }
         }
     }
@@ -66,45 +66,45 @@ public class Calculator {
      */
     public void addOperation(OpperationType type)
     {
-        Token last = tokenList.get(tokenList.size() - 1);
+        Token last = operationTokenizer.get(operationTokenizer.size() - 1);
 
         if(last.getTokenType() == TokenType.Number)
         {
             switch(type)
             {
                 case PLUS:
-                    tokenList.add(TokenType.Operation, "+");
+                    operationTokenizer.add(TokenType.Operation, "+");
                     break;
                 case MINUS:
-                    tokenList.add(TokenType.Operation, "-");
+                    operationTokenizer.add(TokenType.Operation, "-");
                     break;
                 case MULTIPLY:
-                    tokenList.add(TokenType.Operation, "*");
+                    operationTokenizer.add(TokenType.Operation, "*");
                     break;
                 case DIVIDE:
-                    tokenList.add(TokenType.Operation, "/");
+                    operationTokenizer.add(TokenType.Operation, "/");
                     break;
                 case SIN:
-                    tokenList.add(TokenType.Operation, "sin");
-                    tokenList.add(TokenType.Operation, "(");
+                    operationTokenizer.add(TokenType.Operation, "sin");
+                    operationTokenizer.add(TokenType.Operation, "(");
                     break;
                 case COS:
-                    tokenList.add(TokenType.Operation, "cos");
-                    tokenList.add(TokenType.Operation, "(");
+                    operationTokenizer.add(TokenType.Operation, "cos");
+                    operationTokenizer.add(TokenType.Operation, "(");
                     break;
                 case TAN:
-                    tokenList.add(TokenType.Operation, "tan");
-                    tokenList.add(TokenType.Operation, "(");
+                    operationTokenizer.add(TokenType.Operation, "tan");
+                    operationTokenizer.add(TokenType.Operation, "(");
                     break;
                 case POWER:
-                    tokenList.add(TokenType.Operation, "^");
+                    operationTokenizer.add(TokenType.Operation, "^");
                     break;
                 case OPENBRACKET:
-                    tokenList.add(TokenType.Operation, "(");
+                    operationTokenizer.add(TokenType.Operation, "(");
                     break;
                 case CLOSEBRACKET:
                     // implment a way to check if there is an active open bracket
-                    tokenList.add(TokenType.Operation, ")");
+                    operationTokenizer.add(TokenType.Operation, ")");
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid OpperationType");
