@@ -45,7 +45,7 @@ public class Calculator {
         }
 
         //if last token is a number then the digit will be appended to the existing number
-        if(last.getTokenType() == TokenType.Number)
+        if(last != null && last.getTokenType() == TokenType.Number)
         {
             if(Character.isDigit(digit) || (digit == '.' && !last.data.contains(".")))
             {
