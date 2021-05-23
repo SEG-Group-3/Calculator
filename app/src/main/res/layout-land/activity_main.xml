@@ -161,7 +161,7 @@
         </TableLayout>
 
         <TableLayout
-            android:id="@+id/numpad"
+            android:id="@+id/numPad"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
@@ -315,7 +315,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toStartOf="@id/calculation_tab"
-            android:layout_toEndOf="@id/numpad"
+            android:layout_toEndOf="@id/numPad"
             android:background="#AA3E3E">
 
             <TableRow

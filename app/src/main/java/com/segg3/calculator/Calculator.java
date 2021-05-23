@@ -1,7 +1,5 @@
 package com.segg3.calculator;
 
-import android.util.Log;
-
 import com.segg3.calculator.tokenizer.Token;
 import com.segg3.calculator.tokenizer.TokenList;
 import com.segg3.calculator.tokenizer.TokenType;
@@ -16,8 +14,8 @@ import java.util.Stack;
 
 public class Calculator {
 
-    public TokenList operationTokenizer;
-    public List<Operation> operations;
+    public final TokenList operationTokenizer;
+    public final List<Operation> operations;
 
     public Calculator() {
         operationTokenizer = new TokenList();

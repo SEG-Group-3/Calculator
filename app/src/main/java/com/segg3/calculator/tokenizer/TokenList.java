@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TokenList {
-    public List<Token> tokens = new ArrayList<>(0);
+    public final List<Token> tokens = new ArrayList<>(0);
 
     // region Brackets
 
@@ -22,7 +22,7 @@ public class TokenList {
         return depth;
     }
 
-    public boolean openBracket() {
+    public void openBracket() {
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
             if (last.data.equals(")") || last.getTokenType() == TokenType.Number) {
@@ -31,20 +31,18 @@ public class TokenList {
         }
 
         tokens.add(new Token(TokenType.Bracket, "("));
-        return true;
     }
 
-    public boolean closeBracket() {
+    public void closeBracket() {
         if (getBracketDepth() == 0) // So we don't have negative bracket depth
-            return false;
+            return;
 
         Token last = tokens.get(tokens.size() - 1);
         if (last.getTokenType() == TokenType.Bracket && last.data.equals("(")) { // Ensure brackets must have something inside before being closed
-            return false;
+            return;
         }
 
         tokens.add(new Token(TokenType.Bracket, ")"));
-        return true;
     }
 
     public void closeAllBrackets() {

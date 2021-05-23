@@ -9,9 +9,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.segg3.calculator.tokenizer.TokenList;
-import com.segg3.calculator.tokenizer.TokenType;
-
 import java.util.Objects;
 
 
