@@ -328,26 +328,6 @@
 
                 <Button
 
-                    android:id="@+id/invBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="INV"
-                    android:textAllCaps="false" />
-
-                <Button
-
-                    android:id="@+id/angBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="RAD"
-                    android:textAllCaps="false" />
-
-                <Button
-
                     android:id="@+id/sinBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
@@ -377,6 +357,17 @@
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
                     android:text="tan"
+                    android:textAllCaps="false" />
+
+                <Button
+
+                    android:id="@+id/absBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onButtonClick"
+                    android:text="abs"
                     android:textAllCaps="false" />
 
             </TableRow>
@@ -428,43 +419,12 @@
                     android:onClick="onButtonClick"
                     android:text="√" />
 
-                <Button
-
-                    android:id="@+id/powBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onButtonClick"
-                    android:text="^" />
             </TableRow>
 
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1">
-
-                <Button
-
-                    android:id="@+id/piBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="π"
-                    android:textAllCaps="false"
-                    android:onClick="onButtonClick" />
-
-                <Button
-
-                    android:id="@+id/eBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onButtonClick"
-                    android:text="e"
-                    android:textAllCaps="false" />
 
                 <Button
 
@@ -495,6 +455,16 @@
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
                     android:text="!" />
+
+                <Button
+
+                    android:id="@+id/powBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onButtonClick"
+                    android:text="^" />
 
             </TableRow>
 

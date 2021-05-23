@@ -3,7 +3,7 @@ package com.segg3.calculator.tokenizer;
 import androidx.annotation.NonNull;
 
 public class Token {
-    private TokenType type;
+    public final TokenType type;
     public String data;
 
     public Token(TokenType type, String data) {
@@ -11,14 +11,13 @@ public class Token {
         this.data = data;
     }
 
-    public TokenType getTokenType()
-    {
+    public TokenType getTokenType() {
         return type;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return data ;
+        return data;
     }
 }

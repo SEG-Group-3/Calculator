@@ -1,17 +1,15 @@
 package com.segg3.calculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.segg3.calculator.tokenizer.TokenList;
 import com.segg3.calculator.tokenizer.TokenType;
-
-import java.net.CacheRequest;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
         model = new ViewModelProvider(this).get(CalculatorViewModel.class);
         setContentView(R.layout.activity_main);
 
-        Calculator calculator = model.getCalculator().getValue();
-        ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
-        //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
+        updateTextValues();
     }
 
 
@@ -36,72 +32,61 @@ public class MainActivity extends AppCompatActivity {
         // TODO Change this to an if-statement chain (A-Studio already has a method to do this for us)
         // Select "switch" -> Press Alt-Enter -> Replace 'switch' with 'if'
         Calculator calculator = model.getCalculator().getValue();
-        //TokenList operations = calculator.operationTokenizer;
-        switch (v.getId()) {
-            case R.id.minusBtn:
-                calculator.addOperation(OperationType.MINUS);
-                break;
-            case R.id.plusBtn:
-                calculator.addOperation(OperationType.PLUS);
-                break;
-            case R.id.timesBtn:
-                calculator.addOperation(OperationType.MULTIPLY);
-                break;
-            case R.id.divBtn:
-                calculator.addOperation(OperationType.DIVIDE);
-                break;
-            case R.id.openBtn:
-                calculator.addOperation(OperationType.OPENBRACKET);
-                break;
-            case R.id.closeBtn:
-                calculator.addOperation(OperationType.CLOSEBRACKET);
-                break;
-            case R.id.powBtn:
-                calculator.addOperation(OperationType.POWER);
-                break;
-            case R.id.percentBtn:
-                //calculator.add(TokenType.Operation, "%");
-                break;
-            case R.id.factBtn:
-                //calculator.add(TokenType.Operation, "!");
-                break;
-            case R.id.zeroBtn:
-            case R.id.oneBtn:
-            case R.id.twoBtn:
-            case R.id.threeBtn:
-            case R.id.fourBtn:
-            case R.id.fiveBtn:
-            case R.id.sixBtn:
-            case R.id.sevenBtn:
-            case R.id.eightBtn:
-            case R.id.nineBtn:
-                String btnText = (String) ((Button)findViewById(v.getId())).getText();
-                calculator.addDigit(btnText.charAt(0));
-                break;
-            case R.id.periodBtn:
-                calculator.addDigit('.');
-                break;
-            case R.id.sinBtn:
-            case R.id.cosBtn:
-            case R.id.tanBtn:
-            case R.id.lnBtn:
-            case R.id.logBtn:
-                btnText = (String) ((Button)findViewById(v.getId())).getText();
-                //calculator.functionCall(btnText);
-                break;
-            case R.id.sqrtBtn:
-                //calculator.functionCall("sqrt");
-            case R.id.delBtn:
-                //calculator.removeLast();
-                break;
-            case R.id.clearBtn:
-                //calculator.clear();
-                break;
-            default:
-                break;
+        TokenList operations = calculator.operationTokenizer;
+        int id = v.getId();
+        if (id == R.id.minusBtn) {
+            operations.subOperation();
+        } else if (id == R.id.plusBtn) {
+            operations.addOperation();
+        } else if (id == R.id.timesBtn) {
+            operations.mulOperation();
+        } else if (id == R.id.divBtn) {
+            operations.divOperation();
+        } else if (id == R.id.openBtn) {
+            operations.openBracket();
+        } else if (id == R.id.closeBtn) {
+            operations.closeBracket();
+        } else if (id == R.id.powBtn) {
+            operations.powOperation();
+        } else if (id == R.id.percentBtn) {
+            operations.add(TokenType.Operation, "%");
+        } else if (id == R.id.factBtn) {
+            operations.add(TokenType.Operation, "!");
+        } else if (id == R.id.zeroBtn || id == R.id.oneBtn || id == R.id.twoBtn || id == R.id.threeBtn || id == R.id.fourBtn || id == R.id.fiveBtn || id == R.id.sixBtn || id == R.id.sevenBtn || id == R.id.eightBtn || id == R.id.nineBtn) {
+            String btnText = (String) ((Button) findViewById(v.getId())).getText();
+            operations.addDigit(btnText.charAt(0));
+        } else if (id == R.id.periodBtn) {
+            operations.addDigit('.');
+        } else if (id == R.id.sinBtn || id == R.id.cosBtn || id == R.id.tanBtn || id == R.id.lnBtn || id == R.id.logBtn || id == R.id.absBtn) {
+            String btnText;
+            btnText = (String) ((Button) findViewById(v.getId())).getText();
+            operations.functionCall(btnText);
+        } else if (id == R.id.sqrtBtn) {
+            operations.functionCall("sqrt");
+        } else if (id == R.id.delBtn) {
+            operations.removeLast();
+        } else if (id == R.id.clearBtn) {
+            operations.clear();
+        } else if (id == R.id.equalsBtn) {
+            try {
+                // If last calculation was successful bring it to the main Token
+                float result = calculator.calculate();
+                calculator.operationTokenizer.clear();
+                calculator.operationTokenizer.addDigit(Float.toString(result));
+            } catch (Exception e) {
+            }
         }
         // Updates the text views
-        ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
-        //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
+        updateTextValues();
+    }
+
+    public void updateTextValues() {
+        Calculator calculator = model.getCalculator().getValue();
+        ((TextView) findViewById(R.id.calc_input)).setText(calculator.operationTokenizer.toEquationString());
+        try {
+            ((TextView) findViewById(R.id.calc_preview)).setText(Float.toString(calculator.calculate()));
+        } catch (Exception e) {
+            ((TextView) findViewById(R.id.calc_preview)).setText("Bad expression!");
+        }
     }
 }
