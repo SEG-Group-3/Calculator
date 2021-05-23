@@ -9,9 +9,7 @@ import java.util.stream.Collectors;
 public class TokenList {
     public List<Token> tokens = new ArrayList<>(0);
 
-    public TokenList() {
-
-    }
+    // region Brackets
 
     public int getBracketDepth() {
         int depth = 0;
@@ -24,18 +22,11 @@ public class TokenList {
         return depth;
     }
 
-    public void removeLast() {
-        if (tokens.size() > 0)
-            tokens.remove(tokens.size() - 1);
-    }
-
-    // region Brackets
-
     public boolean openBracket() {
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
             if (last.data.equals(")") || last.getTokenType() == TokenType.Number) {
-                mulOperation();
+                addToken(TokenType.Operation, "*");
             }
         }
 
@@ -56,131 +47,51 @@ public class TokenList {
         return true;
     }
 
-    // endregion
-
-    // region Operations
-
-    private void addOperationToken(Token token) {
-        if (tokens.size() > 0) {
-            Token last = tokens.get(tokens.size() - 1);
-            if (last.getTokenType() == TokenType.Operation) {
-                tokens.remove(last);
-            }
+    public void closeAllBrackets() {
+        // Note that this may cause redundant brackets that may be cleaned later
+        for (int i = 0; i < getBracketDepth(); i++) {
+            tokens.add(new Token(TokenType.Bracket, ")"));
         }
-        tokens.add(token);
-    }
-
-
-    public void addOperation() {
-        // Can't start with plus
-        if (tokens.size() == 0)
-            return;
-
-        Token last = tokens.get(tokens.size() - 1);
-        if (last.getTokenType() == TokenType.Number && last.data.equals("-")) {
-            removeLast();
-            return;
-        }
-
-
-        // Override last operations
-        addOperationToken(new Token(TokenType.Operation, "+"));
-    }
-
-    public void subOperation() {
-        if (tokens.size() == 0) {
-            tokens.add(new Token(TokenType.Number, "-"));
-            return;
-        }
-
-        Token last = tokens.get(tokens.size() - 1);
-        if (last.getTokenType() == TokenType.Number && last.data.equals("-")) {
-            return;
-        }
-        if (last.data.equals("(")) {
-            tokens.add(new Token(TokenType.Number, "-"));
-            return;
-        }
-        addOperationToken(new Token(TokenType.Operation, "-"));
-
-    }
-
-    public void mulOperation() {
-        // Can't start with mul
-        if (tokens.size() == 0)
-            return;
-
-        Token last = tokens.get(tokens.size() - 1);
-        if (last.getTokenType() == TokenType.Number && last.data.equals("-")) {
-            removeLast();
-            return;
-        }
-
-        // Override last operations
-        addOperationToken(new Token(TokenType.Operation, "*"));
-    }
-
-    public void divOperation() {
-        // Can't start with div
-        if (tokens.size() == 0)
-            return;
-
-        Token last = tokens.get(tokens.size() - 1);
-        if (last.getTokenType() == TokenType.Number && last.data.equals("-")) {
-            removeLast();
-            return;
-        }
-
-        // Override last operations
-        addOperationToken(new Token(TokenType.Operation, "/"));
-    }
-
-    public void powOperation() {
-        // Can't start with pow
-        if (tokens.size() == 0)
-            return;
-
-        // Override last operations
-        addOperationToken(new Token(TokenType.Operation, "^"));
     }
 
     // endregion
 
-    // region Numbers
-
-    public void addDigit(char digit) {
-        if (tokens.size() > 0) {
-            Token last = tokens.get(tokens.size() - 1);
-            if (last.getTokenType() == TokenType.Number) {
-                // Continue writing to last number
-                last.data += digit;
-            } else {
-                if (last.data.equals(")"))
-                    mulOperation();
-                tokens.add(new Token(TokenType.Number, "" + digit));
-            }
-        } else {
-            tokens.add(new Token(TokenType.Number, "" + digit));
-        }
-    }
+    // region Adding tokens
 
     public void addDigit(String digit) {
+        if (digit.equals(".")){
+            addPeriod();
+            return;
+        }
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
             if (last.getTokenType() == TokenType.Number) {
                 // Continue writing to last number
                 last.data += digit;
-            } else {
-                if (last.data.equals(")"))
-                    mulOperation();
-                tokens.add(new Token(TokenType.Number, digit));
-            }
-        } else {
-            tokens.add(new Token(TokenType.Number, digit));
+                return;
+            } else if (last.getTokenType().equals(TokenType.Operation) && last.data.equals("-")){
+
+                if (tokens.size()>=2){
+                    Token beforeLast = tokens.get(tokens.size() - 2);
+                    // If there is not a number before "last" convert minus to number
+                    // [ 1, +, (, -, 1, )] becomes [ 1, +, (, -1, )]
+                    // [ 1, -, 1] stays the same
+                    if (!beforeLast.type.equals(TokenType.Number)){
+                        removeLast();
+                        tokens.add(new Token(TokenType.Number, "-"));
+                    } else{
+                        tokens.add(new Token(TokenType.Number, digit ));
+                        return;
+                    }
+                }
+            } else if (last.data.equals(")"))
+                    addToken(TokenType.Operation, "*");
+
         }
+        tokens.add(new Token(TokenType.Number, "" + digit));
     }
 
-    public void addPeriod() {
+    private void addPeriod() {
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
             if (last.getTokenType() == TokenType.Number) {
@@ -192,7 +103,7 @@ public class TokenList {
                 last.data += '.';
             } else {
                 if (last.data.equals(")"))
-                    mulOperation();
+                    addToken(TokenType.Operation, "*");
                 tokens.add(new Token(TokenType.Number, "0."));
             }
         } else {
@@ -200,50 +111,57 @@ public class TokenList {
         }
     }
 
-    // endregion
-
-    // region Functions
-
-    public void functionCall(String fun_name) {
+    public void addFunction(String identifier) {
         //Only for tokenization, functions will be implemented in Calculator class
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
             if (!(last.data.equals("(")) && (last.getTokenType() != TokenType.Operation)) {
-                mulOperation();
+                addToken(TokenType.Operation, "*");
             }
         }
-        tokens.add(new Token(TokenType.Function, fun_name));
-        tokens.add(new Token(TokenType.Bracket, "("));
+        addToken(TokenType.Function, identifier);
+        addToken(TokenType.Bracket, "(");
     }
-    // endregion
 
-    // region Function Cleanup
-    public void closeAllBrackets() {
-        // Note that this may cause redundant brackets that may be cleaned later
-        for (int i = 0; i < getBracketDepth(); i++) {
-            tokens.add(new Token(TokenType.Bracket, ")"));
+    public void addOp(String op_name) {
+        if (tokens.size() > 0) {
+            Token last = tokens.get(tokens.size() - 1);
+            if (last.getTokenType() == TokenType.Operation) {
+                tokens.remove(last);
+            }
         }
+        addToken(TokenType.Operation, op_name);
     }
+
     // endregion
 
-    // region Required
+    // region Utility
+
     @NonNull
     @Override
     public String toString() {
         return tokens.toString();
     }
 
+    public void removeLast() {
+        if (tokens.size() > 0)
+            tokens.remove(tokens.size() - 1);
+    }
+
     public String toEquationString() {
         return String.join(" ", this.tokens.stream().map(Token::toString).collect(Collectors.joining()));
     }
 
-    public boolean add(TokenType type, String value) {
-        return tokens.add(new Token(type, value));
+    public void addToken(TokenType type, String value) {
+        tokens.add(new Token(type, value));
     }
 
     public void clear() {
         tokens.clear();
     }
 
+    public int size(){
+        return tokens.size();
+    }
     // endregion
 }
