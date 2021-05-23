@@ -12,6 +12,7 @@ import com.segg3.calculator.tokenizer.TokenList;
 import com.segg3.calculator.tokenizer.TokenType;
 
 import java.net.CacheRequest;
+import java.util.EmptyStackException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -102,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
         }
         // Updates the text views
         ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
-        //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
+        try {
+            ((TextView)findViewById(R.id.calc_preview)).setText((Float.toString(calculator.calculate())));
+        } catch (Exception e) {
+            ((TextView)findViewById(R.id.calc_preview)).setText(e.getMessage());
+        }
+
     }
+
+
 }

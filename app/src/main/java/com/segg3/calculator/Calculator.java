@@ -13,8 +13,8 @@ public class Calculator {
         operationTokenizer = new TokenList();
     }
 
-    public float calculate()
-    {
+    public float calculate() throws Exception {
+        //throw new Exception("You tried to divide by 0");
         throw new UnsupportedOperationException();
     }
 
@@ -67,7 +67,7 @@ public class Calculator {
     }
 
     /**
-     * addOperations adds a function, math opperation to TokenList
+     * addOperations adds a function, math operation to TokenList
      *
      * @param type is an OperationType that will be added to the TokenList
      *
