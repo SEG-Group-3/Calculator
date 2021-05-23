@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Calculator calculator = model.getCalculator().getValue();
-        ((TextView)findViewById(R.id.calc_input)).setText(calculator.operationTokenizer.toEquationString());
+        ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
         //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
     }
 
@@ -36,34 +36,34 @@ public class MainActivity extends AppCompatActivity {
         // TODO Change this to an if-statement chain (A-Studio already has a method to do this for us)
         // Select "switch" -> Press Alt-Enter -> Replace 'switch' with 'if'
         Calculator calculator = model.getCalculator().getValue();
-        TokenList operations = calculator.operationTokenizer;
+        //TokenList operations = calculator.operationTokenizer;
         switch (v.getId()) {
             case R.id.minusBtn:
-                operations.subOperation();
+                calculator.addOperation(OperationType.MINUS);
                 break;
             case R.id.plusBtn:
-                operations.addOperation();
+                calculator.addOperation(OperationType.PLUS);
                 break;
             case R.id.timesBtn:
-                operations.mulOperation();
+                calculator.addOperation(OperationType.MULTIPLY);
                 break;
             case R.id.divBtn:
-                operations.divOperation();
+                calculator.addOperation(OperationType.DIVIDE);
                 break;
             case R.id.openBtn:
-                operations.openBracket();
+                calculator.addOperation(OperationType.OPENBRACKET);
                 break;
             case R.id.closeBtn:
-                operations.closeBracket();
+                calculator.addOperation(OperationType.CLOSEBRACKET);
                 break;
             case R.id.powBtn:
-                operations.powOperation();
+                calculator.addOperation(OperationType.POWER);
                 break;
             case R.id.percentBtn:
-                operations.add(TokenType.Operation, "%");
+                //calculator.add(TokenType.Operation, "%");
                 break;
             case R.id.factBtn:
-                operations.add(TokenType.Operation, "!");
+                //calculator.add(TokenType.Operation, "!");
                 break;
             case R.id.zeroBtn:
             case R.id.oneBtn:
@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.eightBtn:
             case R.id.nineBtn:
                 String btnText = (String) ((Button)findViewById(v.getId())).getText();
-                operations.addDigit(btnText);
+                calculator.addDigit(btnText.charAt(0));
                 break;
             case R.id.periodBtn:
-                operations.addPeriod();
+                calculator.addDigit('.');
                 break;
             case R.id.sinBtn:
             case R.id.cosBtn:
@@ -87,21 +87,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.lnBtn:
             case R.id.logBtn:
                 btnText = (String) ((Button)findViewById(v.getId())).getText();
-                operations.functionCall(btnText);
+                //calculator.functionCall(btnText);
                 break;
             case R.id.sqrtBtn:
-                operations.functionCall("sqrt");
+                //calculator.functionCall("sqrt");
             case R.id.delBtn:
-                operations.removeLast();
+                //calculator.removeLast();
                 break;
             case R.id.clearBtn:
-                operations.clear();
+                //calculator.clear();
                 break;
             default:
                 break;
         }
         // Updates the text views
-        ((TextView)findViewById(R.id.calc_input)).setText(operations.toEquationString());
+        ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
         //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
     }
 }

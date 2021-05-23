@@ -1,6 +1,8 @@
 package com.segg3.calculator;
 
+import com.segg3.calculator.tokenizer.Token;
 import com.segg3.calculator.tokenizer.TokenList;
+import com.segg3.calculator.tokenizer.TokenType;
 
 public class Calculator {
 
@@ -26,27 +28,36 @@ public class Calculator {
     public void addDigit(char digit)
     {
         //checking for invalid inputs
-        if(!char.isDigit(digit) && digit != '.')
+        if(!Character.isDigit(digit) && digit != '.')
         {
             throw new IllegalArgumentException("digit char needs to be a number or a '.'");
         }
 
-        Token last = operationTokenizer.get(operationTokenizer.size() - 1);
+        Token last;
+
+        if(operationTokenizer.size() !=  0)
+        {
+            last = operationTokenizer.get(operationTokenizer.size() - 1);
+        }
+        else
+        {
+            last = null;
+        }
 
         //if last token is a number then the digit will be appended to the existing number
         if(last.getTokenType() == TokenType.Number)
         {
-            if(char.isDigit(digit) || (digit == '.' && !last.data.contains(".")))
+            if(Character.isDigit(digit) || (digit == '.' && !last.data.contains(".")))
             {
-                last.data = last.data + digit.toString();
+                last.data = last.data + digit;//new Character(digit).toString();
             }
         }
         //else new token is added to the end of token list
         else
         {
-            if(char.isDigit(digit))
+            if(Character.isDigit(digit))
             {
-                operationTokenizer.add(TokenType.Number, digit.toString());
+                operationTokenizer.add(TokenType.Number, new Character(digit).toString());
             }
             else
             {
@@ -64,7 +75,7 @@ public class Calculator {
      *
      * @exception IllegalStateException
      */
-    public void addOperation(OpperationType type)
+    public void addOperation(OperationType type)
     {
         Token last = operationTokenizer.get(operationTokenizer.size() - 1);
 
@@ -109,7 +120,13 @@ public class Calculator {
                 default:
                     throw new IllegalArgumentException("Invalid OpperationType");
             }
+            return;
         }
         throw new IllegalStateException("Last token needs to be a number");
+    }
+
+    public String displayString()
+    {
+        return operationTokenizer.toEquationString();
     }
 }
