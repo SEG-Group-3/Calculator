@@ -9,6 +9,7 @@ import com.segg3.calculator.tokenizer.TokenType;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -50,6 +51,35 @@ public class Calculator {
         return null;
     }
 
+    public void clear(){
+        operationTokenizer.clear();
+    }
+
+    public void removeLast(){
+        operationTokenizer.removeLast();
+    }
+
+
+    public void addDigit(String digit){
+        operationTokenizer.addDigit(digit);
+    }
+
+    public void addFunction(String fun_name){
+        operationTokenizer.addFunction(fun_name);
+    }
+
+    public void addOp(String fun_name){
+        operationTokenizer.addOp(fun_name);
+    }
+
+    public void openBracket(){
+        operationTokenizer.openBracket();
+    }
+
+    public void closeBracket(){
+        operationTokenizer.closeBracket();
+    }
+
     public List<Token> toRPN() {
         Queue<Token> outQueue = new ArrayDeque<>();
         Stack<Token> opStack = new Stack<>();
@@ -65,11 +95,17 @@ public class Calculator {
                     outQueue.add(opStack.pop());
                 opStack.pop();
             } else if (getOperation(tok.data) != null) {
+
                 if (!tok.getTokenType().equals(TokenType.Function)) {
                     Operation curOp = getOperation(tok.data);
-                    while (opStack.size() > 0 && !opStack.lastElement().data.equals("(") &&
-                            getOperation(opStack.lastElement().data).priority >= curOp.priority)
-                        outQueue.add(opStack.pop());
+                        if( curOp != null)
+                        while (opStack.size() > 0 &&
+                                !opStack.lastElement().data.equals("(")){
+
+                            if (!(Objects.requireNonNull(getOperation(opStack.lastElement().data)).priority >= curOp.priority))
+                                break;
+                            outQueue.add(opStack.pop());
+                        }
                 }
 
                 opStack.add(tok);
@@ -83,26 +119,26 @@ public class Calculator {
     }
 
     public float calculate() {
-
-        List<Token> toks = toRPN();
+        if (operationTokenizer.size() == 0 || operationTokenizer.getBracketDepth() != 0)
+            return 0;
+        List<Token> rpnTokens = toRPN();
         Stack<Token> valStack = new Stack<>();
-        for (Token tok : toks) {
+        for (Token tok : rpnTokens) {
             if (tok.getTokenType().equals(TokenType.Number)) {
                 valStack.add(tok);
             } else {
                 Operation op = getOperation(tok.data);
-                List<Float> args = new ArrayList<>(op.inputCount);
-                for (int i = 0; i < op.inputCount; i++) {
-                    args.add(Float.parseFloat(valStack.pop().data));
+                if( op != null){
+                    List<Float> args = new ArrayList<>(op.inputCount);
+                    for (int i = 0; i < op.inputCount; i++) {
+                        args.add(Float.parseFloat(valStack.pop().data));
+                    }
+                    float result = op.implementation.op(args);
+                    valStack.add(new Token(TokenType.Number, Float.toString(result)));
                 }
-                float result = op.implementation.op(args);
-                valStack.add(new Token(TokenType.Number, Float.toString(result)));
             }
         }
 
-        if (valStack.size() > 1) {
-            Log.println(Log.WARN, "CALC", "Calculator stack should be one!");
-        }
         return Float.parseFloat((valStack.pop().data));
     }
 }
