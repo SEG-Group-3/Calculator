@@ -17,9 +17,9 @@
 
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:ellipsize="start"
         android:singleLine="true"
         android:text=""
-        android:ellipsize="start"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calc_input" />
@@ -42,14 +42,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="430dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calc_preview"
-        app:layout_constraintVertical_bias="1.0"
-        android:layout_width="match_parent">
+        app:layout_constraintVertical_bias="1.0">
 
         <TableLayout
             android:id="@+id/calculation_tab"
@@ -73,7 +74,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="÷" />
+                    android:text="@string/divide" />
 
                 <Button
 
@@ -83,7 +84,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="⌫" />
+                    android:text="@string/backspace" />
             </TableRow>
 
             <TableRow
@@ -99,12 +100,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="×" />
+                    android:text="@string/multiply" />
 
-<!--                <Space-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="fill_parent"-->
-<!--                    android:layout_weight="1" />-->
+                <!--                <Space-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="fill_parent"-->
+                <!--                    android:layout_weight="1" />-->
 
                 <Button
                     android:id="@+id/clearBtn"
@@ -113,7 +114,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="Clr" />
+                    android:text="@string/clear" />
 
             </TableRow>
 
@@ -130,7 +131,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="-" />
+                    android:text="@string/subtract" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -151,7 +152,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="+" />
+                    android:text="@string/add" />
 
                 <Button
 
@@ -161,7 +162,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="=" />
+                    android:text="@string/equals" />
             </TableRow>
         </TableLayout>
 
@@ -187,7 +188,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="7" />
+                    android:text="@string/seven" />
 
                 <Button
 
@@ -197,7 +198,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="8" />
+                    android:text="@string/eight" />
 
                 <Button
 
@@ -207,7 +208,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="9" />
+                    android:text="@string/nine" />
 
             </TableRow>
 
@@ -224,7 +225,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <Button
 
@@ -234,7 +235,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="5" />
+                    android:text="@string/five" />
 
                 <Button
 
@@ -244,7 +245,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="6" />
+                    android:text="@string/six" />
             </TableRow>
 
             <TableRow
@@ -260,7 +261,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <Button
 
@@ -270,7 +271,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <Button
 
@@ -280,7 +281,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="3" />
+                    android:text="@string/three" />
             </TableRow>
 
             <TableRow
@@ -296,7 +297,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="0" />
+                    android:text="@string/zero" />
 
                 <Button
 
@@ -306,11 +307,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="." />
+                    android:text="@string/decimal" />
 
-                <Space
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                <Button
+                    android:id="@+id/button"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/plusMinus" />
 
             </TableRow>
         </TableLayout>
@@ -324,62 +329,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-
-                    android:id="@+id/invBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="INV"
-                    android:textAllCaps="false" />
-
-                <Button
-
-                    android:id="@+id/angBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="RAD"
-                    android:textAllCaps="false" />
-
-                <Button
-
-                    android:id="@+id/sinBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onButtonClick"
-                    android:text="sin"
-                    android:textAllCaps="false" />
-
-                <Button
-
-                    android:id="@+id/cosBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onButtonClick"
-                    android:text="cos"
-                    android:textAllCaps="false" />
-
-                <Button
-
-                    android:id="@+id/tanBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onButtonClick"
-                    android:text="tan"
-                    android:textAllCaps="false" />
-
-            </TableRow>
+                android:layout_weight="1"/>
 
             <TableRow
                 android:layout_width="match_parent"
@@ -394,7 +344,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="%" />
+                    android:text="@string/modulo" />
 
                 <Button
 
@@ -404,7 +354,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="ln"
+                    android:text="@string/ln"
                     android:textAllCaps="false" />
 
                 <Button
@@ -415,7 +365,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="log"
+                    android:text="@string/log"
                     android:textAllCaps="false" />
 
                 <Button
@@ -426,7 +376,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="√" />
+                    android:text="@string/squareRoot" />
 
                 <Button
 
@@ -436,7 +386,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="^" />
+                    android:text="@string/exponent" />
             </TableRow>
 
             <TableRow
@@ -451,9 +401,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="π"
-                    android:textAllCaps="false"
-                    android:onClick="onButtonClick" />
+                    android:onClick="onButtonClick"
+                    android:text="@string/pi"
+                    android:textAllCaps="false" />
 
                 <Button
 
@@ -463,7 +413,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="e"
+                    android:text="@string/euler"
                     android:textAllCaps="false" />
 
                 <Button
@@ -474,7 +424,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="(" />
+                    android:text="@string/bracketLeft" />
 
                 <Button
 
@@ -484,7 +434,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text=")" />
+                    android:text="@string/bracketRight" />
 
                 <Button
 
@@ -494,12 +444,27 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
-                    android:text="!" />
+                    android:text="@string/negation" />
 
             </TableRow>
 
         </TableLayout>
     </RelativeLayout>
+
+    <Button
+
+        android:id="@+id/sinBtn"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:onClick="onButtonClick"
+        android:text="sin"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
