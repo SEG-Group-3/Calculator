@@ -25,7 +25,7 @@ public class TokenList {
     public void openBracket() {
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
-            if (last.data.equals(")") || last.getTokenType() == TokenType.Number) {
+            if (last.data.equals(")") || last.type == TokenType.Number) {
                 addToken(TokenType.Operation, "*");
             }
         }
@@ -38,7 +38,7 @@ public class TokenList {
             return;
 
         Token last = tokens.get(tokens.size() - 1);
-        if (last.getTokenType() == TokenType.Bracket && last.data.equals("(")) { // Ensure brackets must have something inside before being closed
+        if (last.type == TokenType.Bracket && last.data.equals("(")) { // Ensure brackets must have something inside before being closed
             return;
         }
 
@@ -63,18 +63,18 @@ public class TokenList {
         }
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
-            if (last.getTokenType() == TokenType.Number) {
+            if (last.type == TokenType.Number) {
                 // Continue writing to last number
                 last.data += digit;
                 return;
-            } else if (last.getTokenType().equals(TokenType.Operation) && last.data.equals("-")){
+            } else if (last.type.equals(TokenType.Operation) && last.data.equals("-")){
 
                 if (tokens.size()>=2){
                     Token beforeLast = tokens.get(tokens.size() - 2);
                     // If there is not a number before "last" convert minus to number
                     // [ 1, +, (, -, 1, )] becomes [ 1, +, (, -1, )]
                     // [ 1, -, 1] stays the same
-                    if (!beforeLast.getTokenType().equals(TokenType.Number)){
+                    if (!beforeLast.type.equals(TokenType.Number)){
                         removeLast();
                         tokens.add(new Token(TokenType.Number, "-"));
                     } else{
@@ -92,7 +92,7 @@ public class TokenList {
     private void addPeriod() {
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
-            if (last.getTokenType() == TokenType.Number) {
+            if (last.type == TokenType.Number) {
                 // Add period to last number if it already doesn't have one
                 for (char c : last.data.toCharArray()) {
                     if (c == '.') // Number already has period, do nothing
@@ -113,7 +113,7 @@ public class TokenList {
         //Only for tokenization, functions will be implemented in Calculator class
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
-            if (!(last.data.equals("(")) && (last.getTokenType() != TokenType.Operation)) {
+            if (!(last.data.equals("(")) && (last.type != TokenType.Operation)) {
                 addToken(TokenType.Operation, "*");
             }
         }
@@ -124,7 +124,7 @@ public class TokenList {
     public void addOp(String op_name) {
         if (tokens.size() > 0) {
             Token last = tokens.get(tokens.size() - 1);
-            if (last.getTokenType() == TokenType.Operation) {
+            if (last.type == TokenType.Operation) {
                 tokens.remove(last);
             }
         }
