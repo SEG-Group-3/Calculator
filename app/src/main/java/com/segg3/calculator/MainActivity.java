@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.periodBtn:
                 calculator.addDigit('.');
                 break;
-            case R.id.sinBtn:
-            case R.id.cosBtn:
-            case R.id.tanBtn:
+            //case R.id.sinBtn:
+            //case R.id.cosBtn:
+            //case R.id.tanBtn:
             case R.id.lnBtn:
             case R.id.logBtn:
                 btnText = (String) ((Button)findViewById(v.getId())).getText();

@@ -76,7 +76,7 @@
                     android:background="@drawable/circle"
                     android:onClick="onButtonClick"
                     android:text="@string/clear"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
 
                 <Button
@@ -160,10 +160,7 @@
                     android:onClick="onButtonClick"
                     android:text="@string/add"
                     android:textSize="25sp" />
-                <!--                <Space-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="fill_parent"-->
-                <!--                    android:layout_weight="1" />-->
+
             </TableRow>
 
             <TableRow
@@ -375,16 +372,10 @@
                     android:onClick="onButtonClick"
                     android:text="@string/decimal" />
 
-                <Button
-                    android:id="@+id/button"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                <Space
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="25sp"
-                    android:background="@drawable/circle"
-
-                    android:text="@string/plusMinus" />
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
 
             </TableRow>
         </TableLayout>
@@ -413,6 +404,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+
                     android:background="@drawable/circle"
 
                     android:onClick="onButtonClick"
@@ -437,7 +429,7 @@
                     android:id="@+id/logBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
                     android:text="@string/log"
@@ -459,52 +451,13 @@
                     android:onClick="onButtonClick"
                     android:text="@string/squareRoot" />
 
-                <Button
 
-                    android:id="@+id/powBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle"
-
-                    android:textSize="25sp"
-                    android:onClick="onButtonClick"
-                    android:text="@string/exponent" />
             </TableRow>
 
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1">
-
-                <Button
-
-                    android:id="@+id/piBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="25sp"
-                    android:onClick="onButtonClick"
-                    android:background="@drawable/circle"
-
-                    android:text="@string/pi"
-                    android:textAllCaps="false" />
-
-                <Button
-
-                    android:id="@+id/eBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="25sp"
-                    android:onClick="onButtonClick"
-                    android:background="@drawable/circle"
-
-                    android:text="@string/euler"
-                    android:textAllCaps="false" />
 
                 <Button
 
@@ -519,6 +472,7 @@
                     android:onClick="onButtonClick"
                     android:text="@string/bracketLeft" />
 
+
                 <Button
 
                     android:id="@+id/closeBtn"
@@ -531,6 +485,19 @@
 
                     android:onClick="onButtonClick"
                     android:text="@string/bracketRight" />
+
+                <Button
+
+                    android:id="@+id/powBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+
+                    android:textSize="25sp"
+                    android:onClick="onButtonClick"
+                    android:text="@string/exponent" />
 
                 <Button
 
