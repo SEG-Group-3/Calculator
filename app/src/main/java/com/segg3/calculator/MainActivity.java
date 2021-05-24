@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 calculator.addOperation(OperationType.DIVIDE);
                 break;
             case R.id.openBtn:
-                calculator.addOperation(OperationType.OPENBRACKET);
+                calculator.addBracketAndFunctions(OperationType.OPENBRACKET);
                 break;
             case R.id.closeBtn:
                 calculator.addOperation(OperationType.CLOSEBRACKET);
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 //calculator.functionCall(btnText);
                 break;
             case R.id.sqrtBtn:
-                calculator.addOperation(OperationType.SQRT);
+                calculator.addBracketAndFunctions(OperationType.SQRT);
             case R.id.delBtn:
                 calculator.removeLast();
                 break;

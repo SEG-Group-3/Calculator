@@ -77,9 +77,17 @@ public class Calculator {
      */
     public void addOperation(OperationType type)
     {
-        Token last = operationTokenizer.get(operationTokenizer.size() - 1);
+        Token last;
+        if(operationTokenizer.size() > 0)
+        {
+            last = operationTokenizer.get(operationTokenizer.size() - 1);
+        }
+        else
+        {
+            last = null;
+        }
 
-        if(last.type == TokenType.Number)
+        if(last != null && (last.type == TokenType.Number || last.type == TokenType.Bracket))
         {
             switch(type)
             {
@@ -95,34 +103,41 @@ public class Calculator {
                 case DIVIDE:
                     operationTokenizer.addOp("/");
                     break;
-                case SIN:
-                    operationTokenizer.addFunction("sin");
-                    break;
-                case COS:
-                    operationTokenizer.addFunction("cos");
-                    break;
-                case TAN:
-                    operationTokenizer.addFunction("tan");
-                    break;
                 case POWER:
                     operationTokenizer.addOp("^");
                     break;
-                case OPENBRACKET:
-                    operationTokenizer.openBracket();
-                    break;
                 case CLOSEBRACKET:
-                    // implment a way to check if there is an active open bracket
                     operationTokenizer.closeBracket();
                     break;
-                case SQRT:
-                    operationTokenizer.addFunction("SQRT");
                 default:
-                    throw new IllegalArgumentException("Invalid OpperationType");
+                    throw new IllegalArgumentException("Invalid OperationType");
             }
             return;
         }
-        System.out.println("Last token needs to be a number");
-        //throw new IllegalStateException("Last token needs to be a number");
+        throw new IllegalStateException("Last token needs to be a number");
+    }
+    
+    public void addBracketAndFunctions(OperationType type)
+    {
+        switch (type)
+        {
+            case SIN:
+                operationTokenizer.addFunction("sin");
+                return;
+            case COS:
+                operationTokenizer.addFunction("cos");
+                return;
+            case TAN:
+                operationTokenizer.addFunction("tan");
+                return;
+            case OPENBRACKET:
+                operationTokenizer.openBracket();
+                return;
+            case SQRT:
+                operationTokenizer.addFunction("SQRT");
+                return;
+        }
+        throw new IllegalStateException();
     }
 
     public void clear()
