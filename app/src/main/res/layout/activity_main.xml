@@ -55,11 +55,11 @@
         <TableLayout
             android:id="@+id/calculation_tab"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@id/numpad"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@id/numpad"
-            android:background="#FFFFF">
+            android:background="#FFFFFF">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -72,10 +72,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="25sp"
-                    android:onClick="onButtonClick"
                     android:background="@drawable/circle"
-                    android:text="@string/clear" />
+                    android:onClick="onButtonClick"
+                    android:text="@string/clear"
+                    android:textSize="25sp" />
 
 
                 <Button
@@ -85,10 +85,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="25sp"
                     android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
-                    android:text="@string/backspace" />
+                    android:text="@string/backspace"
+                    android:textSize="25sp" />
             </TableRow>
 
             <TableRow
@@ -103,10 +104,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="25sp"
                     android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="@string/multiply" />
+                    android:text="@string/multiply"
+                    android:textSize="25sp" />
 
                 <!--                <Space-->
                 <!--                    android:layout_width="wrap_content"-->
@@ -120,10 +121,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="25sp"
                     android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
-                    android:text="@string/divide" />
+                    android:text="@string/divide"
+                    android:textSize="25sp" />
 
             </TableRow>
 
@@ -138,11 +140,12 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+
                     android:layout_weight="1"
-                    android:textSize="25sp"
                     android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="@string/subtract" />
+                    android:text="@string/subtract"
+                    android:textSize="25sp" />
 
                 <Button
 
@@ -151,14 +154,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="25sp"
                     android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
-                    android:text="@string/add" />
-<!--                <Space-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="fill_parent"-->
-<!--                    android:layout_weight="1" />-->
+                    android:text="@string/add"
+                    android:textSize="25sp" />
+                <!--                <Space-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="fill_parent"-->
+                <!--                    android:layout_weight="1" />-->
             </TableRow>
 
             <TableRow
@@ -166,17 +170,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-<!--                <Button-->
+                <!--                <Button-->
 
-<!--                    android:id="@+id/plusBtn"-->
-<!--                    style="@style/Widget.AppCompat.Button.Borderless"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:textSize="25sp"-->
-<!--                    android:background="@drawable/circle"-->
-<!--                    android:onClick="onButtonClick"-->
-<!--                    android:text="@string/add" />-->
+                <!--                    android:id="@+id/plusBtn"-->
+                <!--                    style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:textSize="25sp"-->
+                <!--                    android:background="@drawable/circle"-->
+                <!--                    android:onClick="onButtonClick"-->
+                <!--                    android:text="@string/add" />-->
 
 
                 <Button
@@ -186,10 +190,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="25sp"
-                    android:onClick="onButtonClick"
                     android:background="@drawable/circle"
-                    android:text="@string/equals" />
+
+                    android:onClick="onButtonClick"
+                    android:text="@string/equals"
+                    android:textSize="25sp" />
             </TableRow>
         </TableLayout>
 
@@ -200,7 +205,7 @@
             android:layout_below="@id/functions_table"
             android:layout_alignStart="@id/functions_table"
             android:layout_marginTop="0dp"
-            android:background="#7CB53F">
+            android:background="#FFFFFF">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -215,6 +220,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
                     android:text="@string/seven" />
 
@@ -226,6 +233,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
                     android:text="@string/eight" />
 
@@ -237,6 +246,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
                     android:text="@string/nine" />
 
@@ -255,6 +265,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
+                    android:background="@drawable/circle"
+
                     android:textSize="25sp"
                     android:text="@string/four" />
 
@@ -266,6 +278,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
+                    android:background="@drawable/circle"
+
                     android:textSize="25sp"
                     android:text="@string/five" />
 
@@ -277,6 +291,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
                     android:text="@string/six" />
             </TableRow>
@@ -294,6 +310,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
                     android:text="@string/one" />
 
@@ -304,6 +322,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
+
                     android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/two" />
@@ -315,9 +335,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:textSize="25sp"
-                    android:text="@string/three" />
+
+                    android:text="@string/three"
+                    android:textSize="25sp" />
             </TableRow>
 
             <TableRow
@@ -332,7 +354,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_margin="5dp"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
 
                     android:onClick="onButtonClick"
                     android:text="@string/zero" />
@@ -345,6 +369,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+
+                    android:background="@drawable/circle"
+
                     android:onClick="onButtonClick"
                     android:text="@string/decimal" />
 
@@ -355,6 +382,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="25sp"
+                    android:background="@drawable/circle"
+
                     android:text="@string/plusMinus" />
 
             </TableRow>

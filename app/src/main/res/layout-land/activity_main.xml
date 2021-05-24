@@ -64,24 +64,27 @@
                 android:layout_weight="1">
 
                 <Button
-
-                    android:id="@+id/divBtn"
+                    android:id="@+id/clearBtn3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="÷" />
+                    android:text="@string/clear"
+                    android:textSize="25sp" />
 
                 <Button
 
-                    android:id="@+id/delBtn"
+                    android:id="@+id/delBtn3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="⌫" />
+                    android:text="@string/backspace"
+                    android:textSize="25sp" />
 
             </TableRow>
 
@@ -92,23 +95,27 @@
 
                 <Button
 
-                    android:id="@+id/timesBtn"
+                    android:id="@+id/timesBtn3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="×" />
+                    android:text="@string/multiply"
+                    android:textSize="25sp" />
 
                 <Button
-                    android:id="@+id/clearBtn"
+
+                    android:id="@+id/divBtn3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="Clr" />
-
+                    android:text="@string/divide"
+                    android:textSize="25sp" />
             </TableRow>
 
             <TableRow
@@ -118,18 +125,27 @@
 
                 <Button
 
-                    android:id="@+id/minusBtn"
+                    android:id="@+id/minusBtn3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="-" />
+                    android:text="@string/subtract"
+                    android:textSize="25sp" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                <Button
+
+                    android:id="@+id/plusBtn2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+                    android:onClick="onButtonClick"
+                    android:text="@string/add"
+                    android:textSize="25sp" />
             </TableRow>
 
             <TableRow
@@ -139,24 +155,15 @@
 
                 <Button
 
-                    android:id="@+id/plusBtn"
+                    android:id="@+id/equalsBtn3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="+" />
-
-                <Button
-
-                    android:id="@+id/equalsBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onButtonClick"
-                    android:text="=" />
-
+                    android:text="@string/equals"
+                    android:textSize="25sp" />
             </TableRow>
         </TableLayout>
 
@@ -309,10 +316,6 @@
 
             </TableRow>
         </TableLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
         <TableLayout
             android:id="@+id/functions_table"
