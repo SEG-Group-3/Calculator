@@ -114,7 +114,7 @@ public class Calculator {
             last = null;
         }
 
-        if(last != null && (last.type == TokenType.Number || last.type == TokenType.Bracket ))
+        if(last != null && (last.type == TokenType.Number || last.data == ")" ))
         {
             switch(type)
             {
@@ -141,7 +141,7 @@ public class Calculator {
             }
             return;
         }
-        throw new IllegalStateException("Last token needs to be a number");
+        //throw new IllegalStateException("Last token needs to be a number");
     }
     
     public void addBracketAndFunctions(OperationType type)
