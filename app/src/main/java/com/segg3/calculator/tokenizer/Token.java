@@ -10,18 +10,19 @@ public class Token {
     public String data;
 
     private static Dictionary<String, Integer> OperationOrder = new Hashtable<String, Integer>();
-    private static boolean intialized = false;
+    private static boolean initialized = false;
     public Token(TokenType type, String data) {
         this.type = type;
         this.data = data;
 
-        if(!Token.intialized)
+        if(!Token.initialized)
         {
-            Token.intialize();
+            Token.initialize();
+            Token.initialized = true;
         }
     }
 
-    private static void intialize()
+    private static void initialize()
     {
         Token.OperationOrder.put("+",0);
         Token.OperationOrder.put("-",0);
@@ -84,7 +85,7 @@ public class Token {
                 return -1;
             }
         }
-        
+
         throw new IllegalArgumentException();
     }
 
