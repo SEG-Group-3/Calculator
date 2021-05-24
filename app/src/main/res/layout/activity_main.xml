@@ -59,7 +59,7 @@
             android:layout_alignTop="@id/numpad"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@id/numpad"
-            android:background="#223EA3">
+            android:background="#FFFFF">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -67,14 +67,16 @@
                 android:layout_weight="1">
 
                 <Button
-
-                    android:id="@+id/divBtn"
+                    android:id="@+id/clearBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
-                    android:text="@string/divide" />
+                    android:background="@drawable/circle"
+                    android:text="@string/clear" />
+
 
                 <Button
 
@@ -83,6 +85,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
                     android:text="@string/backspace" />
             </TableRow>
@@ -99,6 +103,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
                     android:text="@string/multiply" />
 
@@ -108,13 +114,16 @@
                 <!--                    android:layout_weight="1" />-->
 
                 <Button
-                    android:id="@+id/clearBtn"
+
+                    android:id="@+id/divBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
-                    android:text="@string/clear" />
+                    android:text="@string/divide" />
 
             </TableRow>
 
@@ -130,19 +139,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
                     android:text="@string/subtract" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
 
                 <Button
 
@@ -151,8 +151,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+                    android:background="@drawable/circle"
                     android:onClick="onButtonClick"
                     android:text="@string/add" />
+<!--                <Space-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="fill_parent"-->
+<!--                    android:layout_weight="1" />-->
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+<!--                <Button-->
+
+<!--                    android:id="@+id/plusBtn"-->
+<!--                    style="@style/Widget.AppCompat.Button.Borderless"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textSize="25sp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:onClick="onButtonClick"-->
+<!--                    android:text="@string/add" />-->
+
 
                 <Button
 
@@ -161,7 +186,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
+                    android:background="@drawable/circle"
                     android:text="@string/equals" />
             </TableRow>
         </TableLayout>
@@ -187,6 +214,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/seven" />
 
@@ -197,6 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/eight" />
 
@@ -207,6 +236,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/nine" />
 
@@ -225,6 +255,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
+                    android:textSize="25sp"
                     android:text="@string/four" />
 
                 <Button
@@ -235,6 +266,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
+                    android:textSize="25sp"
                     android:text="@string/five" />
 
                 <Button
@@ -244,6 +276,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/six" />
             </TableRow>
@@ -260,6 +293,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/one" />
 
@@ -270,6 +304,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/two" />
 
@@ -281,6 +316,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
+                    android:textSize="25sp"
                     android:text="@string/three" />
             </TableRow>
 
@@ -296,6 +332,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+
                     android:onClick="onButtonClick"
                     android:text="@string/zero" />
 
@@ -306,6 +344,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/decimal" />
 
@@ -315,6 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:text="@string/plusMinus" />
 
             </TableRow>
@@ -343,6 +383,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
+
                     android:onClick="onButtonClick"
                     android:text="@string/modulo" />
 
@@ -353,6 +395,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/ln"
                     android:textAllCaps="false" />
@@ -362,11 +405,12 @@
                     android:id="@+id/logBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="65dp"
                     android:layout_weight="1"
                     android:onClick="onButtonClick"
                     android:text="@string/log"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textSize="25sp" />
 
                 <Button
 
@@ -375,6 +419,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/squareRoot" />
 
@@ -385,6 +430,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/exponent" />
             </TableRow>
@@ -401,6 +447,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/pi"
                     android:textAllCaps="false" />
@@ -412,6 +459,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/euler"
                     android:textAllCaps="false" />
@@ -423,6 +471,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/bracketLeft" />
 
@@ -433,6 +482,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/bracketRight" />
 
@@ -443,6 +493,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="25sp"
                     android:onClick="onButtonClick"
                     android:text="@string/negation" />
 
