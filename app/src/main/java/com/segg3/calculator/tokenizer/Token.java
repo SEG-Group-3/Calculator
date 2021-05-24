@@ -21,6 +21,14 @@ public class Token {
             Token.initialized = true;
         }
     }
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Token)) {
+            return false;
+        }
+        Token other=(Token) o;
+        return other.type.equals(this.type)&&other.data.equals(this.data);
+    }
 
     private static void initialize()
     {
@@ -88,6 +96,7 @@ public class Token {
 
         throw new IllegalArgumentException();
     }
+
 
     @NonNull
     @Override
