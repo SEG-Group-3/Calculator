@@ -121,7 +121,8 @@ public class Calculator {
             }
             return;
         }
-        throw new IllegalStateException("Last token needs to be a number");
+        System.out.println("Last token needs to be a number");
+        //throw new IllegalStateException("Last token needs to be a number");
     }
 
     public void clear()
