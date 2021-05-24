@@ -44,6 +44,11 @@ public class Token {
 
     public int CompareTo(Token t)
     {
+        if(t == null)
+        {
+            throw new NullPointerException();
+        }
+
         if(this.type != TokenType.Number && t.type != TokenType.Number)
         {
             if(Token.OperationOrder.get(this.data) < Token.OperationOrder.get(t.data))
@@ -79,8 +84,8 @@ public class Token {
                 return -1;
             }
         }
+        
         throw new IllegalArgumentException();
-
     }
 
     @NonNull
