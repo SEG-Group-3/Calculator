@@ -122,6 +122,29 @@ public class Calculator {
         throw new IllegalStateException("Last token needs to be a number");
     }
 
+    public void clear()
+    {
+        operationTokenizer.clear();
+    }
+
+    public void removeLast()
+    {
+        if(operationTokenizer.size() > 0)
+        {
+            Token last = operationTokenizer.get(operationTokenizer.size() - 1);
+
+            if(last.type == TokenType.Number && last.data.length() > 1)
+            {
+                last.data = last.data.substring(0,last.data.length() - 1);
+            }
+            else
+            {
+                operationTokenizer.removeLast();
+            }
+
+        }
+    }
+
     public String displayString()
     {
         return operationTokenizer.toEquationString();

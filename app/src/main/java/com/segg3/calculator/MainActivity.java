@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sqrtBtn:
                 //calculator.functionCall("sqrt");
             case R.id.delBtn:
-                //calculator.removeLast();
+                calculator.removeLast();
                 break;
             case R.id.clearBtn:
-                //calculator.clear();
+                calculator.clear();
                 break;
             default:
                 break;
