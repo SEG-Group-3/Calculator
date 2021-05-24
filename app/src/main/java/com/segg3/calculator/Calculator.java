@@ -159,7 +159,7 @@ public class Calculator {
                 operationTokenizer.openBracket();
                 return;
             case SQRT:
-                operationTokenizer.addFunction("SQRT");
+                operationTokenizer.addFunction("sqrt");
                 return;
         }
         throw new IllegalStateException();
