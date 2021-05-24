@@ -64,7 +64,7 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/clearBtn3"
+                    android:id="@+id/clearBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -76,7 +76,7 @@
 
                 <Button
 
-                    android:id="@+id/delBtn3"
+                    android:id="@+id/delBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -95,7 +95,7 @@
 
                 <Button
 
-                    android:id="@+id/timesBtn3"
+                    android:id="@+id/timesBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -107,7 +107,7 @@
 
                 <Button
 
-                    android:id="@+id/divBtn3"
+                    android:id="@+id/divBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -125,7 +125,7 @@
 
                 <Button
 
-                    android:id="@+id/minusBtn3"
+                    android:id="@+id/minusBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -137,7 +137,7 @@
 
                 <Button
 
-                    android:id="@+id/plusBtn2"
+                    android:id="@+id/plusBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -155,7 +155,7 @@
 
                 <Button
 
-                    android:id="@+id/equalsBtn3"
+                    android:id="@+id/equalsBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
