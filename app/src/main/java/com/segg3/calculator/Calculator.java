@@ -114,6 +114,8 @@ public class Calculator {
                     // implment a way to check if there is an active open bracket
                     operationTokenizer.closeBracket();
                     break;
+                case SQRT:
+                    operationTokenizer.addFunction("SQRT");
                 default:
                     throw new IllegalArgumentException("Invalid OpperationType");
             }

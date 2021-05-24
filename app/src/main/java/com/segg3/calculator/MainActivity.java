@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 //calculator.functionCall(btnText);
                 break;
             case R.id.sqrtBtn:
-                //calculator.functionCall("sqrt");
+                calculator.addOperation(OperationType.SQRT);
             case R.id.delBtn:
                 calculator.removeLast();
                 break;
