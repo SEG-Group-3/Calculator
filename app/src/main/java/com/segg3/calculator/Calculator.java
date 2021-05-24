@@ -57,11 +57,11 @@ public class Calculator {
         {
             if(Character.isDigit(digit))
             {
-                operationTokenizer.add(TokenType.Number, new Character(digit).toString());
+                operationTokenizer.addDigit(Character.valueOf(digit).toString());
             }
             else
             {
-                operationTokenizer.add(TokenType.Number, "0.");
+                operationTokenizer.addDigit(".");
             }
         }
     }
@@ -84,38 +84,35 @@ public class Calculator {
             switch(type)
             {
                 case PLUS:
-                    operationTokenizer.add(TokenType.Operation, "+");
+                    operationTokenizer.addOp("+");
                     break;
                 case MINUS:
-                    operationTokenizer.add(TokenType.Operation, "-");
+                    operationTokenizer.addOp("-");
                     break;
                 case MULTIPLY:
-                    operationTokenizer.add(TokenType.Operation, "*");
+                    operationTokenizer.addOp("*");
                     break;
                 case DIVIDE:
-                    operationTokenizer.add(TokenType.Operation, "/");
+                    operationTokenizer.addOp("/");
                     break;
                 case SIN:
-                    operationTokenizer.add(TokenType.Operation, "sin");
-                    operationTokenizer.add(TokenType.Operation, "(");
+                    operationTokenizer.addFunction("sin");
                     break;
                 case COS:
-                    operationTokenizer.add(TokenType.Operation, "cos");
-                    operationTokenizer.add(TokenType.Operation, "(");
+                    operationTokenizer.addFunction("cos");
                     break;
                 case TAN:
-                    operationTokenizer.add(TokenType.Operation, "tan");
-                    operationTokenizer.add(TokenType.Operation, "(");
+                    operationTokenizer.addFunction("tan");
                     break;
                 case POWER:
-                    operationTokenizer.add(TokenType.Operation, "^");
+                    operationTokenizer.addOp("^");
                     break;
                 case OPENBRACKET:
-                    operationTokenizer.add(TokenType.Operation, "(");
+                    operationTokenizer.openBracket();
                     break;
                 case CLOSEBRACKET:
                     // implment a way to check if there is an active open bracket
-                    operationTokenizer.add(TokenType.Operation, ")");
+                    operationTokenizer.closeBracket();
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid OpperationType");
