@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import java.util.EmptyStackException;
 public class MainActivity extends AppCompatActivity {
     public CalculatorViewModel model;
 
+    Button btVibrate;
+    Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
         Calculator calculator = model.getCalculator().getValue();
         ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
+
+
         //((TextView)findViewById(R.id.calc_preview)).setText(calculator.calculate());
     }
-
 
     public void onButtonClick(View v) {
         // Should add a respective button to the calculator
@@ -110,6 +114,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
 }
