@@ -1,5 +1,7 @@
 package com.segg3.calculator;
 
+import android.util.Log;
+
 import com.segg3.calculator.tokenizer.Token;
 import com.segg3.calculator.tokenizer.TokenList;
 import com.segg3.calculator.tokenizer.TokenType;
@@ -112,7 +114,7 @@ public class Calculator {
             last = null;
         }
 
-        if(last != null && (last.type == TokenType.Number || last.type == TokenType.Bracket))
+        if(last != null && (last.type == TokenType.Number || last.type == TokenType.Bracket ))
         {
             switch(type)
             {
@@ -148,18 +150,22 @@ public class Calculator {
         {
             case SIN:
                 operationTokenizer.addFunction("sin");
+                operationTokenizer.openBracket();
                 return;
             case COS:
                 operationTokenizer.addFunction("cos");
+                operationTokenizer.openBracket();
                 return;
             case TAN:
                 operationTokenizer.addFunction("tan");
+                operationTokenizer.openBracket();
                 return;
             case OPENBRACKET:
                 operationTokenizer.openBracket();
                 return;
             case SQRT:
-                operationTokenizer.addFunction("SQRT");
+                operationTokenizer.addFunction("sqrt");
+                operationTokenizer.openBracket();
                 return;
         }
         throw new IllegalStateException();
@@ -232,26 +238,54 @@ public class Calculator {
 
 
     public float calculate() {
-        if (operationTokenizer.size() == 0 || operationTokenizer.getBracketDepth() != 0)
+        int intialSize = operationTokenizer.size();
+        if (intialSize == 0)
+        {
             return 0;
+        }
+        if(operationTokenizer.getBracketDepth() != 0)
+        {
+            operationTokenizer.closeAllBrackets();
+        }
+
         List<Token> rpnTokens = getRPN();
         Stack<Token> valStack = new Stack<>();
-        for (Token tok : rpnTokens) {
-            if (tok.type.equals(TokenType.Number)) {
-                valStack.add(tok);
-            } else {
-                Operation op = getOperation(tok.data);
-                if( op != null){
-                    List<Float> args = new ArrayList<>(op.inputCount);
-                    for (int i = 0; i < op.inputCount; i++) {
-                        args.add(Float.parseFloat(valStack.pop().data));
+        boolean tmp = true;
+        try
+        {
+            for (Token tok : rpnTokens) {
+                if (tok.type.equals(TokenType.Number)) {
+                    valStack.add(tok);
+                } else {
+                    Operation op = getOperation(tok.data);
+                    if( op != null){
+                        List<Float> args = new ArrayList<>(op.inputCount);
+                        for (int i = 0; i < op.inputCount; i++) {
+                            args.add(Float.parseFloat(valStack.pop().data));
+                        }
+                        float result = op.implementation.op(args);
+                        valStack.add(new Token(TokenType.Number, Float.toString(result)));
                     }
-                    float result = op.implementation.op(args);
-                    valStack.add(new Token(TokenType.Number, Float.toString(result)));
                 }
             }
         }
+        catch (Exception e)
+        {
+            tmp = false;
+        }
 
-        return Float.parseFloat((valStack.pop().data));
+
+        if(intialSize != operationTokenizer.size())
+        {
+            for(int i1 = 0; i1 < operationTokenizer.size() - intialSize + 1; i1++)
+            {
+                operationTokenizer.removeLast();
+            }
+        }
+        if(tmp)
+        {
+            return Float.parseFloat((valStack.pop().data));
+        }
+        return 0;
     }
 }
