@@ -25,10 +25,8 @@
     <string name = "decimal">.</string>
     <string name = "equals">=</string>
 
-    <string name = "squareRoot">√</string>
+    <string name = "squareRoot">sqrt</string>
     <string name = "modulo">%</string>
-    <string name="pi">π</string>
-    <string name="euler">e</string>
     <string name="negation">!</string>
     <string name="ln">ln</string>
     <string name="log">log</string>
