@@ -4,16 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.segg3.calculator.tokenizer.TokenList;
-import com.segg3.calculator.tokenizer.TokenType;
-
-import java.net.CacheRequest;
-import java.util.EmptyStackException;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             calculator.addOperation("!");
         } else if (id == R.id.zeroBtn || id == R.id.oneBtn || id == R.id.twoBtn || id == R.id.threeBtn || id == R.id.fourBtn || id == R.id.fiveBtn || id == R.id.sixBtn || id == R.id.sevenBtn || id == R.id.eightBtn || id == R.id.nineBtn || id == R.id.periodBtn) {
             String btnText = (String) ((Button) findViewById(v.getId())).getText();
-            calculator.addDigit(btnText.charAt(0));
+            calculator.addDigit(btnText);
         } else if (id == R.id.sinBtn || id == R.id.cosBtn || id == R.id.tanBtn || id == R.id.lnBtn || id == R.id.logBtn || id == R.id.sqrtBtn) {
             String btnText;
             btnText = (String) ((Button) findViewById(v.getId())).getText();
@@ -62,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
             calculator.removeLast();
         } else if (id == R.id.clearBtn) {
             calculator.clear();
+        } else if (id == R.id.equalsBtn){
+            try {
+                float result = calculator.calculate();
+                calculator.clear();
+                calculator.addDigit(Float.toString(result));
+            }catch (Exception ignore){}
         }
 
         UpdateTextView();
@@ -69,12 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void UpdateTextView(){
         Calculator calculator = Objects.requireNonNull(model.getCalculator().getValue());
+        TextView calcInput = ((TextView)findViewById(R.id.calc_input));
+        TextView calcPreview = ((TextView)findViewById(R.id.calc_preview));
         // Updates the text views
-        ((TextView)findViewById(R.id.calc_input)).setText(calculator.displayString());
+        calcInput.setText(calculator.displayString());
         try {
-            ((TextView)findViewById(R.id.calc_preview)).setText((Float.toString(calculator.calculate())));
+            DecimalFormat format = new DecimalFormat("0.######");
+            calcPreview.setText(format.format(calculator.calculate()));
         } catch (Exception e) {
-            ((TextView)findViewById(R.id.calc_preview)).setText(e.getMessage());
+            calcPreview.setText(e.getMessage());
         }
     }
 }
