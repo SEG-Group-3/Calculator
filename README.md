@@ -13,6 +13,7 @@
 | CalculatorViewModel     | Holds the Calculator Instance in our activity                      |
 | Operation               | Describes a math operation (priority, input count, implementation) |
 | OperationImplementation | Interface used to declare an operation function                    |
+| Calculator              | Calculates a TokenList                                             |
 | MainActivity            | Entry point of the application                                     |
 
 ## 🧮 The calculation
