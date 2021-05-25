@@ -78,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
             DecimalFormat format = new DecimalFormat("0.######");
             calcPreview.setText(format.format(calculator.calculate()));
         } catch (Exception e) {
-            calcPreview.setText(e.getMessage());
+            if (e.getMessage() == null || e.getMessage().isEmpty())
+                calcPreview.setText(getString(R.string.badExpr));
+            else
+                calcPreview.setText(e.getMessage());
         }
     }
 }

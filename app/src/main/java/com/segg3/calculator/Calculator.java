@@ -250,8 +250,9 @@ public class Calculator {
     }
 
     public float calculate() {
-        if (operationTokenizer.size() == 0 || operationTokenizer.getBracketDepth() != 0)
-            return 0;
+        if (operationTokenizer.size() == 0)
+            throw new ArithmeticException("Enter an equation!");
+
         List<Token> rpnTokens = getRPN();
         Stack<Token> valStack = new Stack<>();
         for (Token tok : rpnTokens) {

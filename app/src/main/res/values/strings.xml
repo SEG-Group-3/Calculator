@@ -34,4 +34,5 @@
     <string name="tan">tan</string>
     <string name="abs">abs</string>
 
+    <string name="badExpr">Bad expression!</string>
 </resources>
