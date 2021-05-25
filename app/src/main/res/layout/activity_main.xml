@@ -67,6 +67,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
+
                 <Button
                     android:id="@+id/clearBtn"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -77,7 +78,6 @@
                     android:onClick="onButtonClick"
                     android:text="@string/clear"
                     android:textSize="20sp" />
-
 
                 <Button
 
@@ -110,11 +110,6 @@
                     android:text="@string/multiply"
                     android:textSize="25sp" />
 
-                <!--                <Space-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="fill_parent"-->
-                <!--                    android:layout_weight="1" />-->
-
                 <Button
 
                     android:id="@+id/divBtn"
@@ -128,25 +123,17 @@
                     android:text="@string/divide"
                     android:textSize="25sp" />
 
+                <!--                <Space-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="fill_parent"-->
+                <!--                    android:layout_weight="1" />-->
+
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-
-                <Button
-
-                    android:id="@+id/minusBtn"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-
-                    android:layout_weight="1"
-                    android:background="@drawable/circle"
-                    android:onClick="onButtonClick"
-                    android:text="@string/subtract"
-                    android:textSize="25sp" />
 
                 <Button
 
@@ -159,6 +146,19 @@
 
                     android:onClick="onButtonClick"
                     android:text="@string/add"
+                    android:textSize="25sp" />
+
+                <Button
+
+                    android:id="@+id/minusBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+                    android:onClick="onButtonClick"
+                    android:text="@string/subtract"
                     android:textSize="25sp" />
 
             </TableRow>
@@ -389,7 +389,68 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1">
+
+                <Button
+
+                    android:id="@+id/sinBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+
+                    android:onClick="onButtonClick"
+
+                    android:text="@string/sin"
+                    android:textAllCaps="false"
+                    android:textSize="25sp" />
+
+                <Button
+
+                    android:id="@+id/cosBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+
+                    android:onClick="onButtonClick"
+
+                    android:text="@string/cos"
+                    android:textAllCaps="false"
+                    android:textSize="25sp" />
+
+                <Button
+
+                    android:id="@+id/tanBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+
+                    android:onClick="onButtonClick"
+
+                    android:text="@string/tan"
+                    android:textAllCaps="false"
+                    android:textSize="25sp" />
+
+                <Button
+
+                    android:id="@+id/absBtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/circle"
+
+                    android:onClick="onButtonClick"
+
+                    android:text="@string/abs"
+                    android:textAllCaps="false"
+                    android:textSize="25sp" />
+            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
@@ -515,21 +576,6 @@
 
         </TableLayout>
     </RelativeLayout>
-
-    <Button
-
-        android:id="@+id/sinBtn"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:onClick="onButtonClick"
-        android:text="sin"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

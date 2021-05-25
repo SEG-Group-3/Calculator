@@ -32,5 +32,9 @@
     <string name="negation">!</string>
     <string name="ln">ln</string>
     <string name="log">log</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+    <string name="abs">abs</string>
 
 </resources>
