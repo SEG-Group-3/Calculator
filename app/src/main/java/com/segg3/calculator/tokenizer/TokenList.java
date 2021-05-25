@@ -85,6 +85,24 @@ public class TokenList {
                     tokens.add(new Token(TokenType.Number, "-"+digit));
                     return;
                 }
+            } else if (last.type.equals(TokenType.Operation) && last.data.equals("+")){
+
+                if (tokens.size()>=2){
+                    Token beforeLast = tokens.get(tokens.size() - 2);
+                    // If there is not a number before "last" convert minus to number
+                    // [ 1, +, (, -, 1, )] becomes [ 1, +, (, -1, )]
+                    // [ 1, -, 1] stays the same
+                    if (beforeLast.data.equals("(")){
+                        removeLast();
+                        tokens.add(new Token(TokenType.Number, digit));
+                        return;
+                    }
+                } else{
+                    // Start with -n
+                    removeLast();
+                    tokens.add(new Token(TokenType.Number, digit));
+                    return;
+                }
             } else if (last.data.equals(")"))
                 addToken(TokenType.Operation, "*");
 
