@@ -99,22 +99,16 @@ public class Calculator {
      * @param type is an OperationType that will be added to the TokenList
      *
      * @exception IllegalArgumentException is thrown if the type is a valid type from list
-     *
-     * @exception IllegalStateException
      */
     public void addOperation(OperationType type)
     {
-        Token last;
+        Token last = null;
         if(operationTokenizer.size() > 0)
         {
             last = operationTokenizer.get(operationTokenizer.size() - 1);
         }
-        else
-        {
-            last = null;
-        }
 
-        if(last != null && (last.type == TokenType.Number || last.data == ")" ))
+        if(last != null && (last.type == TokenType.Number || last.data.equals(")")))
         {
             switch(type)
             {
@@ -139,11 +133,27 @@ public class Calculator {
                 default:
                     throw new IllegalArgumentException("Invalid OperationType");
             }
-            return;
         }
-        //throw new IllegalStateException("Last token needs to be a number");
     }
-    
+
+    public void addFunctionCall(String identifier){
+        // Dude... no need to change this
+        operationTokenizer.addFunction(identifier);
+    }
+
+    public void addOperation(String identifier){
+        // No need to change this either... Okay?
+        operationTokenizer.addOp(identifier);
+    }
+
+    public void openBracket(){
+        operationTokenizer.openBracket();
+    }
+
+    public void closeBracket(){
+        operationTokenizer.closeBracket();
+    }
+
     public void addBracketAndFunctions(OperationType type)
     {
         switch (type)
