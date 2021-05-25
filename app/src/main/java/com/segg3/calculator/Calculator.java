@@ -15,7 +15,7 @@ import java.util.Stack;
 
 public class Calculator {
 
-    private TokenList operationTokenizer;
+    private final TokenList operationTokenizer;
     public final List<Operation> operations;
 
 

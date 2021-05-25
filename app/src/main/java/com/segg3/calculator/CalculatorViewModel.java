@@ -19,6 +19,4 @@ public class CalculatorViewModel extends ViewModel {
         }
         return calculator;
     }
-
-// Rest of the ViewModel...
 }
