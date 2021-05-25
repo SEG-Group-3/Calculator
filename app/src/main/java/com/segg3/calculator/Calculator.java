@@ -24,20 +24,27 @@ public class Calculator {
         operationTokenizer=new TokenList();
         operations= new ArrayList<>();
 
-        operations.add(new Operation("sin", 0, 1, (in) -> (float) Math.sin(in.get(0))));
-        operations.add(new Operation("cos", 0, 1, (in) -> (float) Math.cos(in.get(0))));
-        operations.add(new Operation("tan", 0, 1, (in) -> (float) Math.tan(in.get(0))));
+        operations.add(new Operation("sin", 99, 1, (in) -> (float) Math.sin(in.get(0))));
+        operations.add(new Operation("cos", 99, 1, (in) -> (float) Math.cos(in.get(0))));
+        operations.add(new Operation("tan", 99, 1, (in) -> (float) Math.tan(in.get(0))));
 
-        operations.add(new Operation("abs", 0, 1, (in) -> Math.abs(in.get(0))));
-        operations.add(new Operation("ln", 0, 1, (in) -> (float) Math.log(in.get(0))));
-        operations.add(new Operation("log", 0, 1, (in) -> (float) Math.log10(in.get(0))));
-        operations.add(new Operation("sqrt", 0, 1, (in) -> (float) Math.sqrt(in.get(0))));
+        operations.add(new Operation("abs", 99, 1, (in) -> Math.abs(in.get(0))));
+        operations.add(new Operation("ln", 99, 1, (in) -> (float) Math.log(in.get(0))));
+        operations.add(new Operation("log", 99, 1, (in) -> (float) Math.log10(in.get(0))));
+        operations.add(new Operation("sqrt", 99, 1, (in) -> (float) Math.sqrt(in.get(0))));
 
         operations.add(new Operation("+", 0, 2, (in) -> in.get(1) + in.get(0)));
         operations.add(new Operation("-", 0, 2, (in) -> in.get(1) - in.get(0)));
         operations.add(new Operation("/", 1, 2, (in) -> in.get(1) / in.get(0)));
         operations.add(new Operation("*", 1, 2, (in) -> in.get(1) * in.get(0)));
-        //operations.add(new Operation("!", 2, 1, (in) -> (float) Gamma.gamma(in.get(0) + 1)));
+        operations.add(new Operation("!", 2, 1, (in) -> {
+            float x = 1 + in.get(0);
+            double ser = 1.0 + 76.18009173 / (x + 0) - 86.50532033 / (x + 1)
+                    + 24.01409822 / (x + 2) - 1.231739516 / (x + 3)
+                    + 0.00120858003 / (x + 4) - 0.00000536382 / (x + 5);
+            float lnGamma = (float) ((x - 0.5) * Math.log(x + 4.5) - (x + 4.5) + Math.log(ser * Math.sqrt(2 * Math.PI)));
+            return (float) Math.exp(lnGamma);
+        } ));
         operations.add(new Operation("%", 2, 1, (in) -> in.get(0) / 100));
         operations.add(new Operation("^", 2, 2, (in) -> (float) Math.pow(in.get(1), in.get(0))));
     }
@@ -146,6 +153,8 @@ public class Calculator {
         operationTokenizer.addOp(identifier);
     }
 
+    public void addDigit(String digit) {operationTokenizer.addDigit(digit);}
+
     public void openBracket(){
         operationTokenizer.openBracket();
     }
@@ -208,6 +217,7 @@ public class Calculator {
     {
         return operationTokenizer.toEquationString();
     }
+
     public List<Token> getRPN() {
         Queue<Token> outQueue = new ArrayDeque<>();
         Stack<Token> opStack = new Stack<>();
@@ -246,56 +256,27 @@ public class Calculator {
         return new ArrayList<>(outQueue);
     }
 
-
     public float calculate() {
-        int intialSize = operationTokenizer.size();
-        if (intialSize == 0)
-        {
+        if (operationTokenizer.size() == 0 || operationTokenizer.getBracketDepth() != 0)
             return 0;
-        }
-        if(operationTokenizer.getBracketDepth() != 0)
-        {
-            operationTokenizer.closeAllBrackets();
-        }
-
         List<Token> rpnTokens = getRPN();
         Stack<Token> valStack = new Stack<>();
-        boolean tmp = true;
-        try
-        {
-            for (Token tok : rpnTokens) {
-                if (tok.type.equals(TokenType.Number)) {
-                    valStack.add(tok);
-                } else {
-                    Operation op = getOperation(tok.data);
-                    if( op != null){
-                        List<Float> args = new ArrayList<>(op.inputCount);
-                        for (int i = 0; i < op.inputCount; i++) {
-                            args.add(Float.parseFloat(valStack.pop().data));
-                        }
-                        float result = op.implementation.op(args);
-                        valStack.add(new Token(TokenType.Number, Float.toString(result)));
+        for (Token tok : rpnTokens) {
+            if (tok.type.equals(TokenType.Number)) {
+                valStack.add(tok);
+            } else {
+                Operation op = getOperation(tok.data);
+                if( op != null){
+                    List<Float> args = new ArrayList<>(op.inputCount);
+                    for (int i = 0; i < op.inputCount; i++) {
+                        args.add(Float.parseFloat(valStack.pop().data));
                     }
+                    float result = op.implementation.op(args);
+                    valStack.add(new Token(TokenType.Number, Float.toString(result)));
                 }
             }
         }
-        catch (Exception e)
-        {
-            tmp = false;
-        }
 
-
-        if(intialSize != operationTokenizer.size())
-        {
-            for(int i1 = 0; i1 < operationTokenizer.size() - intialSize + 1; i1++)
-            {
-                operationTokenizer.removeLast();
-            }
-        }
-        if(tmp)
-        {
-            return Float.parseFloat((valStack.pop().data));
-        }
-        return 0;
+        return Float.parseFloat((valStack.pop().data));
     }
 }
