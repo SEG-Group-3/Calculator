@@ -74,19 +74,22 @@ public class TokenList {
                     // If there is not a number before "last" convert minus to number
                     // [ 1, +, (, -, 1, )] becomes [ 1, +, (, -1, )]
                     // [ 1, -, 1] stays the same
-                    if (!beforeLast.type.equals(TokenType.Number)){
+                    if (beforeLast.data.equals("(")){
                         removeLast();
-                        tokens.add(new Token(TokenType.Number, "-"));
-                    } else{
-                        tokens.add(new Token(TokenType.Number, digit ));
+                        tokens.add(new Token(TokenType.Number, "-"+digit));
                         return;
                     }
+                } else{
+                    // Start with -n
+                    removeLast();
+                    tokens.add(new Token(TokenType.Number, "-"+digit));
+                    return;
                 }
             } else if (last.data.equals(")"))
                 addToken(TokenType.Operation, "*");
 
         }
-        tokens.add(new Token(TokenType.Number, "" + digit));
+        tokens.add(new Token(TokenType.Number, digit));
     }
 
     private void addPeriod() {
