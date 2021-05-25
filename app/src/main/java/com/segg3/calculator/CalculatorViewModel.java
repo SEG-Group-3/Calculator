@@ -3,9 +3,6 @@ package com.segg3.calculator;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.segg3.calculator.tokenizer.Token;
-import com.segg3.calculator.tokenizer.TokenList;
-
 public class CalculatorViewModel extends ViewModel {
 
     // Create a LiveData with a String

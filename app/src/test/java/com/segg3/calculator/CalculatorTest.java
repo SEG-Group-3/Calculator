@@ -12,9 +12,9 @@ public class CalculatorTest extends TestCase {
     public void testToRPN(){
         Calculator calc=new Calculator();
         calc.addDigit('1');
-        calc.addOperation(OperationType.MINUS);
+        calc.addOperation("-");
         calc.addDigit('5');
-        List<Token> expected=new ArrayList<Token>();
+        List<Token> expected= new ArrayList<>();
         expected.add(new Token(TokenType.Number,"1"));
         expected.add(new Token(TokenType.Number,"5"));
         expected.add(new Token(TokenType.Operation,"-"));

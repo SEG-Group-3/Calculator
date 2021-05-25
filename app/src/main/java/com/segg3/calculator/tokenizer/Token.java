@@ -2,9 +2,6 @@ package com.segg3.calculator.tokenizer;
 
 import androidx.annotation.NonNull;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 public class Token {
     public final TokenType type;
     public String data;

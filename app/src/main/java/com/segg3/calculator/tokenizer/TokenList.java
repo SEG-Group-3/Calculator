@@ -148,7 +148,12 @@ public class TokenList {
             if (last.type == TokenType.Operation) {
                 tokens.remove(last);
             }
+            if (last.data.equals("(") && !(op_name.equals("+") || op_name.equals("-"))){
+                return;
+            }
         }
+
+
         addToken(TokenType.Operation, op_name);
     }
 

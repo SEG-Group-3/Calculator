@@ -42,7 +42,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="430dp"
         android:layout_marginTop="8dp"
@@ -436,7 +435,6 @@
 
                 <Button
 
-                    android:id="@+id/absBtn"
                     style="@style/Button.Grey"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

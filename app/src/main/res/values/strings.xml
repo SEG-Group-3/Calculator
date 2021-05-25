@@ -21,7 +21,6 @@
     <string name = "multiply">×</string>
     <string name = "add">+</string>
     <string name = "subtract">-</string>
-    <string name = "plusMinus">+/-</string>
     <string name = "decimal">.</string>
     <string name = "equals">=</string>
 

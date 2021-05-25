@@ -1,7 +1,5 @@
 package com.segg3.calculator;
 
-import android.util.Log;
-
 import com.segg3.calculator.tokenizer.Token;
 import com.segg3.calculator.tokenizer.TokenList;
 import com.segg3.calculator.tokenizer.TokenType;
@@ -100,48 +98,41 @@ public class Calculator {
         }
     }
 
-    /**
-     * addOperations adds a function, math operation to TokenList
-     *
-     * @param type is an OperationType that will be added to the TokenList
-     *
-     * @exception IllegalArgumentException is thrown if the type is a valid type from list
-     */
-    public void addOperation(OperationType type)
-    {
-        Token last = null;
-        if(operationTokenizer.size() > 0)
-        {
-            last = operationTokenizer.get(operationTokenizer.size() - 1);
-        }
-
-        if(last != null && (last.type == TokenType.Number || last.data.equals(")")))
-        {
-            switch(type)
-            {
-                case PLUS:
-                    operationTokenizer.addOp("+");
-                    break;
-                case MINUS:
-                    operationTokenizer.addOp("-");
-                    break;
-                case MULTIPLY:
-                    operationTokenizer.addOp("*");
-                    break;
-                case DIVIDE:
-                    operationTokenizer.addOp("/");
-                    break;
-                case POWER:
-                    operationTokenizer.addOp("^");
-                    break;
-                case CLOSEBRACKET:
-                    operationTokenizer.closeBracket();
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid OperationType");
-            }
-        }
-    }
+//    public void addOperation(OperationType type)
+//    {
+//        Token last = null;
+//        if(operationTokenizer.size() > 0)
+//        {
+//            last = operationTokenizer.get(operationTokenizer.size() - 1);
+//        }
+//
+//        if(last != null && (last.type == TokenType.Number || last.data.equals(")")))
+//        {
+//            switch(type)
+//            {
+//                case PLUS:
+//                    operationTokenizer.addOp("+");
+//                    break;
+//                case MINUS:
+//                    operationTokenizer.addOp("-");
+//                    break;
+//                case MULTIPLY:
+//                    operationTokenizer.addOp("*");
+//                    break;
+//                case DIVIDE:
+//                    operationTokenizer.addOp("/");
+//                    break;
+//                case POWER:
+//                    operationTokenizer.addOp("^");
+//                    break;
+//                case CLOSEBRACKET:
+//                    operationTokenizer.closeBracket();
+//                    break;
+//                default:
+//                    throw new IllegalArgumentException("Invalid OperationType");
+//            }
+//        }
+//    }
 
     public void addFunctionCall(String identifier){
         // Dude... no need to change this
@@ -163,32 +154,34 @@ public class Calculator {
         operationTokenizer.closeBracket();
     }
 
-    public void addBracketAndFunctions(OperationType type)
-    {
-        switch (type)
-        {
-            case SIN:
-                operationTokenizer.addFunction("sin");
-                operationTokenizer.openBracket();
-                return;
-            case COS:
-                operationTokenizer.addFunction("cos");
-                operationTokenizer.openBracket();
-                return;
-            case TAN:
-                operationTokenizer.addFunction("tan");
-                operationTokenizer.openBracket();
-                return;
-            case OPENBRACKET:
-                operationTokenizer.openBracket();
-                return;
-            case SQRT:
-                operationTokenizer.addFunction("sqrt");
-                operationTokenizer.openBracket();
-                return;
-        }
-        throw new IllegalStateException();
-    }
+// --Commented out by Inspection START (5/24/2021 11:04 PM):
+//    public void addBracketAndFunctions(OperationType type)
+//    {
+//        switch (type)
+//        {
+//            case SIN:
+//                operationTokenizer.addFunction("sin");
+//                operationTokenizer.openBracket();
+//                return;
+//            case COS:
+//                operationTokenizer.addFunction("cos");
+//                operationTokenizer.openBracket();
+//                return;
+//            case TAN:
+//                operationTokenizer.addFunction("tan");
+//                operationTokenizer.openBracket();
+//                return;
+//            case OPENBRACKET:
+//                operationTokenizer.openBracket();
+//                return;
+//            case SQRT:
+//                operationTokenizer.addFunction("sqrt");
+//                operationTokenizer.openBracket();
+//                return;
+//        }
+//        throw new IllegalStateException();
+//    }
+// --Commented out by Inspection STOP (5/24/2021 11:04 PM)
 
     public void clear()
     {

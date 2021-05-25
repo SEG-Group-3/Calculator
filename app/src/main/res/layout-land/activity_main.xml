@@ -413,7 +413,6 @@
 
                 <Button
 
-                    android:id="@+id/absBtn"
                     style="@style/Button.Grey"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
