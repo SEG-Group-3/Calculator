@@ -26,4 +26,25 @@ public class CalculatorTest extends TestCase {
         }
     }
 
+    public void testEquation() {
+        Calculator calc = new Calculator();
+        calc.addFunctionCall("sqrt");
+        calc.openBracket();
+        calc.addDigit("13");
+        calc.addOperation("*");
+        calc.addDigit("2");
+        calc.closeBracket();
+        calc.addOperation("-");
+        calc.openBracket();
+        calc.addFunctionCall("sin");
+        calc.addDigit("2");
+
+        float expected =(float) Math.sqrt((13*2) - (Math.sin(2)));
+        float actual = calc.calculate();
+        float delta = expected - actual;
+        assertEquals(expected, actual);
+        assertTrue(Math.abs(delta) < 0.1);
+    }
+
+
 }
